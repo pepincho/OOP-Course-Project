@@ -7,9 +7,13 @@ public:
 public:
 	void distinguishConsoleInput(int argc, char* argv[]);
 public:
-	const int getNumberFiles();
-	void setNumberFiles(int);
-	//void setNumberCommands();
+	const int getNumberFiles() const;
+	//void setNumberFiles(int);
+	const int getNumberCommands() const;
+	//void setNumberCommands(int);
+public:
+	const char** getPathsToFiles() const;
+	const char** getCommands() const;
 private:
 	//void addPathsToFiles(char**, int);
 	//void addCommands(char**, int);

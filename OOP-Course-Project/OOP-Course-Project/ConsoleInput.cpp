@@ -19,17 +19,17 @@ ConsoleInput::~ConsoleInput() {
 }
 
 void ConsoleInput::clearPathsToFiles(char** files, int sizeFiles) {
-	for (int i = 0; i < sizeFiles; i++) {
-		delete[] files[i];
-	}
-	delete[] files;
+	//for (int i = 0; i < sizeFiles; i++) {
+	//	delete[] files[i];
+	//}
+	//delete[] files;
 }
 
 void ConsoleInput::clearCommands(char** commands, int sizeCommands) {
-	for (int i = 0; i < sizeCommands; i++) {
-		delete[] commands[i];
-	}
-	delete[] commands;
+	//for (int i = 0; i < sizeCommands; i++) {
+	//	delete[] commands[i];
+	//}
+	//delete[] commands;
 }
 
 //void ConsoleInput::addPathsToFiles(char** paths, int sizePaths) {
@@ -75,9 +75,6 @@ void ConsoleInput::clearCommands(char** commands, int sizeCommands) {
 //}
 
 void ConsoleInput::distinguishConsoleInput(int argc, char* argv[]) {
-	char** commands;
-	char** pathFiles;
-
 	int counterCommands = 0;
 	int counterFiles = 0;
 
@@ -92,56 +89,43 @@ void ConsoleInput::distinguishConsoleInput(int argc, char* argv[]) {
 			counterFiles++;
 		}
 	}
+	this->numberFiles = counterFiles;
+	this->numberCommands = counterCommands;
+	//setNumberFiles(counterFiles);
+	//setNumberCommands(counterCommands);
 
-	commands = new (std::nothrow) char*[counterCommands];
-	pathFiles = new (std::nothrow) char*[counterFiles];
+	this->commands = new (std::nothrow) char*[counterCommands];
+	this->pathsToFiles = new (std::nothrow) char*[counterFiles];
 
 	int indexCommands = 0;
 	int indexFiles = 0;
 
 	for (int i = 0; i < argc; i++) {
 		if (isCommand(i, argv[i])) {
-			commands[indexCommands] = new (std::nothrow) char[strlen(argv[i]) - 2];
-			//strcpy(commands[indexCommands], argv[i]);
-			copyCommand(commands[indexCommands], argv[i]);
-			//commands[strlen(argv[i])] = "\0";
+			this->commands[indexCommands] = new (std::nothrow) char[strlen(argv[i]) - 2];
+			copyCommand(this->commands[indexCommands], argv[i]);
 			indexCommands++;
 		}
 		else {
 			if (i == 0) {
 				continue;
 			}
-			pathFiles[indexFiles] = new (std::nothrow) char[strlen(argv[i])];
-			strcpy(pathFiles[indexFiles], argv[i]);
-			pathFiles[strlen(argv[i])] = "\0";
+			this->pathsToFiles[indexFiles] = new (std::nothrow) char[strlen(argv[i])];
+			strcpy(this->pathsToFiles[indexFiles], argv[i]);
+			this->pathsToFiles[strlen(argv[i])] = "\0";
 			indexFiles++;
 		}
 	}
-
-	setNumberFiles(counterFiles);
-
-	//std::cout << "---------------------------------" << std::endl;
-
-	//std::cout << "There are " << counterCommands << " commands." << std::endl;
-	//std::cout << "Commands are:" << std::endl;
-
-	//for (int i = 0; i < counterCommands; i++) {
-	//	std::cout << commands[i] << " is a command!" << std::endl;
-	//}
-
-	//std::cout << "---------------------------------" << std::endl;
-
-	//std::cout << "There are " << counterFiles << " files." << std::endl;
-	//std::cout << "Files are:" << std::endl;
-
-	//for (int i = 0; i < counterFiles; i++) {
-	//	std::cout << pathFiles[i] << " is a file!" << std::endl;
-	//}
 }
 
 bool ConsoleInput::isCommand(int index, char* item) {
-	if (item[0] == '-' && item[1] == '-') {
-		return true;
+	if (strlen(item) > 2) {
+		if (item[0] == '-' && item[1] == '-') {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	else {
 		return false;
@@ -160,10 +144,26 @@ void ConsoleInput::copyCommand(char* destinationStr, const char* sourceStr) {
 	destinationStr[j] = '\0';
 }
 
-void ConsoleInput::setNumberFiles(int sizeFiles) {
-	this->numberFiles = sizeFiles;
+//void ConsoleInput::setNumberFiles(int sizeFiles) {
+//	this->numberFiles = sizeFiles;
+//}
+
+const int ConsoleInput::getNumberFiles() const {
+	return this->numberFiles;
 }
 
-const int ConsoleInput::getNumberFiles() {
-	return this->numberFiles;
+//void ConsoleInput::setNumberCommands(int sizeCommands) {
+//	this->numberCommands = sizeCommands;
+//}
+
+const int ConsoleInput::getNumberCommands() const {
+	return this->numberCommands;
+}
+
+const char** ConsoleInput::getPathsToFiles() const {
+	return (const char**)this->pathsToFiles;
+}
+
+const char** ConsoleInput::getCommands() const {
+	return (const char**)this->commands;
 }

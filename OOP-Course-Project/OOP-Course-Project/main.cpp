@@ -9,7 +9,8 @@ int main(int argc, char* argv[]) {
 	cmdInput.distinguishConsoleInput(argc, argv);
 
 	std::cout << "The number of Files is " << cmdInput.getNumberFiles() << std::endl;
-	// std::cout << "The number of Commands is " << cmdInput.numberCommands << std::endl;
+	std::cout << "The number of Commands is " << cmdInput.getNumberCommands() << std::endl;
+
 
 	return 0;
 }
