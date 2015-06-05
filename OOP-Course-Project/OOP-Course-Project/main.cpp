@@ -25,31 +25,31 @@ int main(int argc, char* argv[]) {
 	char* fileName = "test.txt";
 	
 	TextManager fileSource;
-	fileSource.readFile(fileName);
+	fileSource.readToFile(fileName);
 
-	char* sourceFile = fileSource.source;
-
-	//for (int i = 0; i < fileSource.fileSize; i++) {
-	//	std::cout << "source[" << i << "] = " << fileSource.source[i] << std::endl;
-	//}
-	//std::cout << std::endl << std::endl;
-
-	for (int i = 0; i < fileSource.numberLines; i++) {
-		std::cout << "sourceLine[" << i << "] = " << fileSource.sourceLines[i] << std::endl;
+	const char** fileLines = fileSource.getFileLines();
+	for (int i = 0; i < fileSource.getNumberLines(); i++) {
+		std::cout << "line[" << i << "] is " << fileLines[i] << std::endl;
 	}
 
 	std::cout << "--------------------------------------------" << std::endl;
 
-	//char* newLine = "std::cout << \"Peshko\" << std::endl;";
-	//std::cout << strlen(newLine) << std::endl;
-	//int atLine = 5;
-
-	//fileSource.insertLine(newLine, atLine);
+	char* newLine = "std::cout << \"Peshko\" << std::endl;";
+	int atLine = 5;
+	fileSource.insertLine(newLine, atLine);
+	int setLineOn = 0;
+	fileSource.setLine(newLine, setLineOn);
+	fileLines = fileSource.getFileLines();
+	int numberLines = fileSource.getNumberLines();
+	//std::cout << numberLines << std::endl;
+	for (int i = 0; i < numberLines; i++) {
+		std::cout << "line[" << i << "] is " << fileLines[i] << std::endl;
+	}
 
 	//int getLine = 4;
 	//std::cout << getLine << " line is " << fileSource.getLine(getLine) << std::endl;
 
-	//std::cout << "--------------------------------------------" << std::endl;
+	std::cout << "--------------------------------------------" << std::endl;
 	//
 	//char* currText = "opa.cpp";
 	//char* alabala = ".old";

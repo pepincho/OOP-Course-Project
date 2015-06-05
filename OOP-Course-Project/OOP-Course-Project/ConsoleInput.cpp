@@ -15,8 +15,6 @@ ConsoleInput::ConsoleInput() {
 ConsoleInput::~ConsoleInput() {
 	clearPathsToFiles();
 	clearCommands();
-	this->numberFiles = 0;
-	this->numberCommands = 0;
 	std::cout << "ConsoleInput::~ConsoleInput()" << std::endl;
 }
 
@@ -25,6 +23,8 @@ void ConsoleInput::clearPathsToFiles() {
 		delete[] this->pathsToFiles[i];
 	}
 	delete[] pathsToFiles;
+
+	this->numberFiles = 0;
 }
 
 void ConsoleInput::clearCommands() {
@@ -32,6 +32,8 @@ void ConsoleInput::clearCommands() {
 		delete[] this->commands[i];
 	}
 	delete[] this->commands;
+
+	this->numberCommands = 0;
 }
 
 void ConsoleInput::distinguishConsoleInput(int argc, char* argv[]) {
