@@ -1,20 +1,30 @@
 #include <iostream>
 
 #include "ConsoleInput.h"
-#include "FileManager.h"
+#include "TextManager.h"
 
 
 int main(int argc, char* argv[]) {
 
-	//ConsoleInput cmdInput;
-	//cmdInput.distinguishConsoleInput(argc, argv);
+	ConsoleInput cmdInput;
+	cmdInput.distinguishConsoleInput(argc, argv);
 
-	//std::cout << "The number of Files is " << cmdInput.getNumberFiles() << std::endl;
-	//std::cout << "The number of Commands is " << cmdInput.getNumberCommands() << std::endl;
+	std::cout << "The number of Files is " << cmdInput.getNumberFiles() << std::endl;
+	const char** files = cmdInput.getPathsToFiles();
+	for (int i = 0; i < cmdInput.getNumberFiles(); i++) {
+		std::cout << "file[" << i << "] is " << files[i] << std::endl;
+	}
+	std::cout << "The number of Commands is " << cmdInput.getNumberCommands() << std::endl;
+	const char** commands = cmdInput.getCommands();
+	for (int i = 0; i < cmdInput.getNumberCommands(); i++) {
+		std::cout << "command[" << i << "] is " << commands[i] << std::endl;
+	}
+
+	std::cout << "---------------------------------------------" << std::endl;
 
 	char* fileName = "test.txt";
 	
-	FileManager fileSource;
+	TextManager fileSource;
 	fileSource.readFile(fileName);
 
 	char* sourceFile = fileSource.source;
@@ -30,25 +40,25 @@ int main(int argc, char* argv[]) {
 
 	std::cout << "--------------------------------------------" << std::endl;
 
-	char* newLine = "std::cout << \"Peshko\" << std::endl;";
-	std::cout << strlen(newLine) << std::endl;
-	int atLine = 5;
+	//char* newLine = "std::cout << \"Peshko\" << std::endl;";
+	//std::cout << strlen(newLine) << std::endl;
+	//int atLine = 5;
 
-	fileSource.insertLine(newLine, atLine);
+	//fileSource.insertLine(newLine, atLine);
 
-	int getLine = 4;
-	std::cout << getLine << " line is " << fileSource.getLine(getLine) << std::endl;
+	//int getLine = 4;
+	//std::cout << getLine << " line is " << fileSource.getLine(getLine) << std::endl;
 
-	std::cout << "--------------------------------------------" << std::endl;
-	
-	char* currText = "opa.cpp";
-	char* alabala = ".old";
+	//std::cout << "--------------------------------------------" << std::endl;
+	//
+	//char* currText = "opa.cpp";
+	//char* alabala = ".old";
 
-	char newText[50];
+	//char newText[50];
 
-	strcpy(newText, currText);
-	strcat(newText, alabala);
-	std::cout << newText << std::endl;
+	//strcpy(newText, currText);
+	//strcat(newText, alabala);
+	//std::cout << newText << std::endl;
 
 	//rename(fileName, newText);
 

@@ -77,13 +77,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleInput.cpp" />
-    <ClCompile Include="FileManager.cpp" />
+    <ClCompile Include="TextManager.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleInput.h" />
-    <ClInclude Include="FileManager.h" />
+    <ClInclude Include="TextManager.h" />
     <ClInclude Include="Line.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

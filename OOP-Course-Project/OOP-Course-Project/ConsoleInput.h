@@ -8,21 +8,16 @@ public:
 	void distinguishConsoleInput(int argc, char* argv[]);
 public:
 	const int getNumberFiles() const;
-	//void setNumberFiles(int);
 	const int getNumberCommands() const;
-	//void setNumberCommands(int);
 public:
 	const char** getPathsToFiles() const;
 	const char** getCommands() const;
 private:
-	//void addPathsToFiles(char**, int);
-	//void addCommands(char**, int);
-private:
-	bool isCommand(int, char*);
+	bool isCommand(char*);
 	void copyCommand(char*, const char*);
 private:
-	void clearPathsToFiles(char**, int);
-	void clearCommands(char**, int);
+	void clearPathsToFiles();
+	void clearCommands();
 private:
 	int numberFiles;
 	char** pathsToFiles;
