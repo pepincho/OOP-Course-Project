@@ -22,15 +22,17 @@ int main(int argc, char* argv[]) {
 
 	std::cout << "---------------------------------------------" << std::endl;
 
-	char* fileName = "test.txt";
+	char* fileName = "test_2.txt";
 	
 	TextManager fileSource;
 	fileSource.readToFile(fileName);
+	int numberLines = fileSource.getNumberLines();
 
 	const char** fileLines = fileSource.getFileLines();
-	for (int i = 0; i < fileSource.getNumberLines(); i++) {
+	for (int i = 0; i < numberLines; i++) {
 		std::cout << "line[" << i << "] is " << fileLines[i] << std::endl;
 	}
+
 
 	std::cout << "--------------------------------------------" << std::endl;
 
@@ -40,27 +42,25 @@ int main(int argc, char* argv[]) {
 	int setLineOn = 0;
 	fileSource.setLine(newLine, setLineOn);
 	fileLines = fileSource.getFileLines();
-	int numberLines = fileSource.getNumberLines();
+	numberLines = fileSource.getNumberLines();
 	//std::cout << numberLines << std::endl;
 	for (int i = 0; i < numberLines; i++) {
 		std::cout << "line[" << i << "] is " << fileLines[i] << std::endl;
 	}
-
+	std::cout << "--------------------------------------------" << std::endl;
+	fileSource.removeLine(atLine);
+	fileLines = fileSource.getFileLines();
+	numberLines = fileSource.getNumberLines();
+	for (int i = 0; i < numberLines; i++) {
+		std::cout << "line[" << i << "] is " << fileLines[i] << std::endl;
+	}
+	
 	//int getLine = 4;
 	//std::cout << getLine << " line is " << fileSource.getLine(getLine) << std::endl;
 
+	//std::cout << "--------------------------------------------" << std::endl;
+	//fileSource.writeToFile(fileName);
 	std::cout << "--------------------------------------------" << std::endl;
-	//
-	//char* currText = "opa.cpp";
-	//char* alabala = ".old";
-
-	//char newText[50];
-
-	//strcpy(newText, currText);
-	//strcat(newText, alabala);
-	//std::cout << newText << std::endl;
-
-	//rename(fileName, newText);
 
 	return 0;
 }

@@ -1,14 +1,12 @@
 #pragma once
 
-#include "Line.h"
-
 class TextManager {
 public:
 	TextManager();
 	~TextManager();
 public:
 	void readToFile(char*);
-	void writeToFile(char*);
+	void writeToFile(char* &);
 public:
 	void removeLine(int);
 	void setLine(char*, int);
@@ -24,6 +22,4 @@ private:
 private:
 	char** sourceLines;
 	int numberLines;
-private:
-	//Line* lines;
 };

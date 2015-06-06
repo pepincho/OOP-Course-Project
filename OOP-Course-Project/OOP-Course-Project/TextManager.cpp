@@ -62,6 +62,12 @@ void TextManager::readToFile(char* fileName) {
 				currentIndex = 0;
 			}
 			else {
+				//if (c == 0xBB || c == 0xBF || c == 0xEF) {
+				//	std::cout << "hop" << std::endl;
+				//	this->sourceLines[currentLine][currentIndex] = '\0';
+				//	currentIndex++;
+				//	continue;
+				//}
 				this->sourceLines[currentLine][currentIndex] = c;
 				this->sourceLines[currentLine][currentIndex + 1] = '\0';
 				currentIndex++;
@@ -96,9 +102,11 @@ int TextManager::getFileNumberLines(char* fileName) {
 
 	while (myFile) {
 		myFile.get(c);
-
-		if (c == '\n')
-			counterLines++;		
+		if (myFile) {
+			if (c == '\n') {
+				counterLines++;
+			}
+		}
 	}
 
 	return counterLines;
@@ -110,14 +118,8 @@ void TextManager::insertLine(char* line, int atRow) {
 	if (temp == NULL)
 		return;
 	int indx = 0;
-	std::cout << newNumLines << std::endl;
-	//for (int i = 0; i < this->numberLines + 1; i++) {
-	//	temp[i] = new (std::nothrow) char[50];
-	//}
 
 	for (int i = 0; i < atRow; i++) {
-		//strcpy(temp[i], this->sourceLines[i]);
-		//temp[strlen(this->sourceLines[i])] = '\0';
 		temp[i] = this->sourceLines[i];
 		indx = i;
 	}
@@ -129,19 +131,11 @@ void TextManager::insertLine(char* line, int atRow) {
 		return;
 
 	strcpy_s(temp[atRow], lineLen, line);
-	//temp[lineLen] = '\0';
 
 	for (int i = indx; i < this->numberLines; i++) {
 		temp[i + 1] = this->sourceLines[i];
-		//strcpy(temp[i + 1], this->sourceLines[i]);
-		//temp[strlen(this->sourceLines[i])] = '\0';
 	}
 
-	//std::cout << "The new char** of lines is:" << std::endl;
-	//for (int i = 0; i < newSize; i++) {
-	//	std::cout << "temp[" << i << "] = " << temp[i] << std::endl;
-	//}
-	//clearSourceLines();
 	this->numberLines = newNumLines;
 	this->sourceLines = new (std::nothrow) char*[this->numberLines];
 
@@ -150,16 +144,10 @@ void TextManager::insertLine(char* line, int atRow) {
 
 	for (int i = 0; i < this->numberLines; i++) {
 		size_t buffSize = strlen(temp[i]) + 1;
-		//strcpy_s(this->sourceLines[i], buffSize, temp[i]);
 		this->sourceLines[i] = temp[i];
-		//std::cout << this->sourceLines[i] << std::endl;
 	}
 
-	delete temp;
-	//for (int i = 0; i < this->numberLines; i++) {
-	//	delete[] temp[i];
-	//}
-	//delete[] temp;
+	delete[] temp;
 }
 
 const char* TextManager::getLine(size_t atRow) const {
@@ -168,19 +156,49 @@ const char* TextManager::getLine(size_t atRow) const {
 
 void TextManager::setLine(char* newLine, int atRow) {
 	newLine = "#include <iostream> peshko";
-	this->sourceLines[atRow] = new (std::nothrow) char[strlen(newLine) + 1];
+	this->sourceLines[atRow] = new (std::nothrow) char[strlen(newLine) + 1 + 2];
 	strcpy_s(this->sourceLines[atRow], strlen(newLine) + 1, newLine);
-	//delete[] this->sourceLines[atRow];
-	//this->sourceLines[atRow] = NULL;
-	//this->sourceLines[atRow] = newLine;
+	//this->sourceLines[atRow][strlen(newLine) + 1] = '\r';
+	//this->sourceLines[atRow][strlen(newLine) + 1 + 1] = '\n';
 }
 
 void TextManager::removeLine(int atRow) {
+	int newNumLines = this->numberLines - 1;
 
+	for (int i = atRow; i < this->numberLines - 1; i++) {
+		size_t currLen = strlen(this->sourceLines[i + 1]) + 1;
+		strcpy_s(this->sourceLines[i], currLen, this->sourceLines[i + 1]);
+	}
+	delete[] sourceLines[this->numberLines - 1];
+	this->numberLines = newNumLines;
 }
 
-void TextManager::writeToFile(char* currFileName) {
+void TextManager::writeToFile(char* &currFileName) {
+	size_t newLenNameFile = strlen(currFileName) + 1;
+	char* newName = new char[newLenNameFile];
+	strcpy_s(newName, newLenNameFile, currFileName);
+	char* toOldName = ".old";
+	char newText[50];
+	
+	strcpy(newText, currFileName);
+	strcat(newText, toOldName);
+	std::cout << "The new name of the file is " << newText << std::endl;
+	
+	rename(currFileName, newText);
 
+	std::ofstream myTextFile(newName, std::ios::binary | std::ios::out, std::ios::trunc);
+	if (!myTextFile) {
+		std::cerr << "Error!" << std::endl;
+		return;
+	}
+
+	for (int i = 0; i < this->numberLines; i++) {
+	//myTextFile.write((const char*)&this->sourceLines, sizeof(this->sourceLines));
+		//myTextFile << sourceLines[i];
+		//myTextFile.write((const char*)&this->sourceLines[i], sizeof(this->sourceLines[i]));
+	}
+
+	myTextFile.close();
 }
 
 const char** TextManager::getFileLines() const {
@@ -188,5 +206,6 @@ const char** TextManager::getFileLines() const {
 }
 
 const int TextManager::getNumberLines() const {
+	std::cout << "number of lines: " << this->numberLines << std::endl;
 	return (const int) this->numberLines;
 }
