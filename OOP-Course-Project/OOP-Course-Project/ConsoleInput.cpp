@@ -31,7 +31,7 @@ void ConsoleInput::clearCommands() {
 	for (int i = 0; i < this->numberCommands; i++) {
 		delete[] this->commands[i];
 	}
-	delete[] this->commands;
+	delete[] commands;
 
 	this->numberCommands = 0;
 }
@@ -51,9 +51,9 @@ void ConsoleInput::distinguishConsoleInput(int argc, char* argv[]) {
 
 	this->numberFiles = counterFiles;
 	this->numberCommands = counterCommands;
-
-	this->commands = new char*[this->numberFiles];
-	this->pathsToFiles = new char*[this->numberCommands];
+	
+	this->commands = new char*[this->numberCommands];
+	this->pathsToFiles = new char*[this->numberFiles];
 
 	int indexCommands = 0;
 	int indexFiles = 0;
