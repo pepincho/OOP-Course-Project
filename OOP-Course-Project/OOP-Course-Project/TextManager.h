@@ -3,6 +3,7 @@
 class TextManager {
 public:
 	TextManager();
+	TextManager(char*);
 	~TextManager();
 public:
 	void readToFile(char*);
@@ -15,6 +16,8 @@ public:
 public:
 	const char** getFileLines() const;
 	const int getNumberLines() const;
+	
+	const char* getFileName() const;
 private:
 	int getFileSize(char*);
 	int getFileNumberLines(char*);
@@ -22,4 +25,6 @@ private:
 private:
 	char** sourceLines;
 	int numberLines;
+
+	char* fileName;
 };

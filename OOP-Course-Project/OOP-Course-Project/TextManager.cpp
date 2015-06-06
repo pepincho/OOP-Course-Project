@@ -7,11 +7,13 @@
 TextManager::TextManager() {
 	this->sourceLines = NULL;
 	this->numberLines = 0;
+	this->fileName = NULL;
 	std::cout << "TextManager::TextManager()" << std::endl;
 }
 
 TextManager::~TextManager() {
 	clearSourceLines();
+	delete[] this->fileName;
 	std::cout << "TextManager::~TextManager()" << std::endl;
 }
 
@@ -208,4 +210,17 @@ const char** TextManager::getFileLines() const {
 const int TextManager::getNumberLines() const {
 	std::cout << "number of lines: " << this->numberLines << std::endl;
 	return (const int) this->numberLines;
+}
+
+const char* TextManager::getFileName() const {
+	return (const char*) this->fileName;
+}
+
+TextManager::TextManager(char* fileName) {
+	this->fileName = new (std::nothrow) char[strlen(fileName) + 1];
+	if (this->fileName == NULL)
+		return;
+	strcpy_s(this->fileName, strlen(fileName) + 1, fileName);
+	
+	readToFile(this->fileName);
 }
