@@ -1,10 +1,12 @@
-﻿Build started 6/7/2015 11:07:11 AM.
+﻿Build started 6/7/2015 3:06:40 PM.
      1>Project "E:\GitHub\OOP-Course-Project\OOP-Course-Project\OOP-Course-Project\OOP-Course-Project.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Comments.cpp
          Comments.cpp
-     1>e:\github\oop-course-project\oop-course-project\oop-course-project\comments.cpp(53): warning C4715: 'Comments::findStartComment' : not all control paths return a value
-     1>e:\github\oop-course-project\oop-course-project\oop-course-project\comments.cpp(70): warning C4715: 'Comments::findEndComment' : not all control paths return a value
+     1>e:\github\oop-course-project\oop-course-project\oop-course-project\comments.cpp(61): warning C4715: 'Comments::findEndComment' : not all control paths return a value
+     1>e:\github\oop-course-project\oop-course-project\oop-course-project\comments.cpp(50): warning C4715: 'Comments::findStartComment' : not all control paths return a value
+     1>e:\github\oop-course-project\oop-course-project\oop-course-project\comments.cpp(175): warning C4715: 'Comments::findEndMultiLineComment' : not all control paths return a value
+     1>e:\github\oop-course-project\oop-course-project\oop-course-project\comments.cpp(156): warning C4715: 'Comments::findStartMultiLineComment' : not all control paths return a value
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\GitHub\OOP-Course-Project\OOP-Course-Project\Debug\OOP-Course-Project.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\GitHub\OOP-Course-Project\OOP-Course-Project\Debug\OOP-Course-Project.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\GitHub\OOP-Course-Project\OOP-Course-Project\Debug\OOP-Course-Project.lib" /MACHINE:X86 Debug\Command.obj
          Debug\CommandFactory.obj
@@ -21,4 +23,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.54
+Time Elapsed 00:00:00.55

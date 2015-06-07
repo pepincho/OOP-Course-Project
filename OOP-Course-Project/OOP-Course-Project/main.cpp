@@ -25,10 +25,10 @@ int main(int argc, char* argv[]) {
 	std::cout << "------------------------------------------" << std::endl;
 
 	//char* currFileName = "test_2.txt";
-	char* currFileName = "test_comments.txt";
+	char* currFileName = "test_multi_line_comments.txt";
 
 	TextManager fileSource(currFileName);
-
+	int asan; //pehko
 	char** source = (char**) fileSource.getFileLines();
 	int counterLines = fileSource.getNumberLines();
 
@@ -51,13 +51,13 @@ int main(int argc, char* argv[]) {
 	counterLines = fileSource.getNumberLines();
 	
 	for (int i = 0; i < counterLines; i++) {
-		std::cout << "line[" << i << "] -> " << source[i] << std::endl;
+		std::cout << "<> line[" << i << "] -> " << source[i] << std::endl;
 	}
 
 	std::cout << "------------------------------------------" << std::endl;
 
-	std::cout << "size " << strlen(sourceAfter[5]) << std::endl;
-	std::cout << "check " << sourceAfter[5] << std::endl;
+	//std::cout << "size " << strlen(sourceAfter[5]) << std::endl;
+	//std::cout << "check " << sourceAfter[5] << std::endl;
 
 
 

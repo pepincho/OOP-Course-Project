@@ -18,12 +18,12 @@ TextManager::~TextManager() {
 }
 
 void TextManager::clearSourceLines() {
-	for (int i = 0; i < this->numberLines; i++) {
-		delete[] this->sourceLines[i];
-	}
-	delete[] sourceLines;
+	//for (int i = 0; i < this->numberLines; i++) {
+	//	delete[] this->sourceLines[i];
+	//}
+	//delete[] sourceLines;
 
-	this->numberLines = 0;
+	//this->numberLines = 0;
 }
 
 void TextManager::readToFile(char* fileName) {
