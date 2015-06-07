@@ -6,6 +6,11 @@ NewLines::NewLines() {
 	std::cout << "[Entering NewLines::NewLines()]" << std::endl;
 }
 
+NewLines::NewLines(bool newLinesStyle) {
+	std::cout << "[Entering NewLines::NewLines(bool newLinesStyle)]" << std::endl;
+	this->newLinesStyle = newLinesStyle;
+}
+
 NewLines::~NewLines() {
 	std::cout << "[Entering NewLines::~NewLines()]" << std::endl;
 }

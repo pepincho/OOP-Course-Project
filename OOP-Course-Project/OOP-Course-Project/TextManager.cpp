@@ -157,8 +157,11 @@ const char* TextManager::getLine(size_t atRow) const {
 }
 
 void TextManager::setLine(char* newLine, int atRow) {
-	newLine = "#include <iostream> peshko";
-	this->sourceLines[atRow] = new (std::nothrow) char[strlen(newLine) + 1 + 2];
+	//newLine = "#include <iostream> peshko";
+	//this->sourceLines[atRow] = new (std::nothrow) char[strlen(newLine) + 1 + 2];
+	
+	//std::cout << "size of newLine in setLine: " << strlen(newLine) << std::endl;
+	this->sourceLines[atRow] = new (std::nothrow) char[strlen(newLine) + 1];
 	strcpy_s(this->sourceLines[atRow], strlen(newLine) + 1, newLine);
 	//this->sourceLines[atRow][strlen(newLine) + 1] = '\r';
 	//this->sourceLines[atRow][strlen(newLine) + 1 + 1] = '\n';

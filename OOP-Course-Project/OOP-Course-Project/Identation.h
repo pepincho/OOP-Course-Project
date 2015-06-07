@@ -6,7 +6,12 @@
 class Identation : public Command {
 public:
 	Identation();
+	Identation(bool);
 	virtual ~Identation();
 
 	virtual void processCommand(TextManager& text);
+private:
+	// 0 -> with tabs
+	// 1 -> with spaces
+	bool identationStyle;
 };

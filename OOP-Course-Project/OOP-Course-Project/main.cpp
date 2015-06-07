@@ -22,17 +22,49 @@ int main(int argc, char* argv[]) {
 		std::cout << "command[" << i << "] is " << nameCommands[i] << std::endl;
 	}
 
-	char* currFileName = "test_2.txt";
+	std::cout << "------------------------------------------" << std::endl;
+
+	//char* currFileName = "test_2.txt";
+	char* currFileName = "test_comments.txt";
+
 	TextManager fileSource(currFileName);
+
+	char** source = (char**) fileSource.getFileLines();
+	int counterLines = fileSource.getNumberLines();
+
+	for (int i = 0; i < counterLines; i++) {
+		std::cout << "line[" << i << "] -> " << source[i] << std::endl;
+	}
+
+	std::cout << "------------------------------------------" << std::endl;
 
 	CommandFactory commandFac(cmdInput.getCommands(), cmdInput.getNumberCommands());
 	int numberCommands = commandFac.getNumberCommands();
-
-	//const Command** commands = commandFac.getCommands();
 	
 	for (int i = 0; i < numberCommands; i++) {
 		commandFac.getCommands()[i]->processCommand(fileSource);
 	}
 
+	std::cout << "------------------------------------------" << std::endl;
+
+	char** sourceAfter = (char**)fileSource.getFileLines();
+	counterLines = fileSource.getNumberLines();
+	
+	for (int i = 0; i < counterLines; i++) {
+		std::cout << "line[" << i << "] -> " << source[i] << std::endl;
+	}
+
+	std::cout << "------------------------------------------" << std::endl;
+
+	std::cout << "size " << strlen(sourceAfter[5]) << std::endl;
+	std::cout << "check " << sourceAfter[5] << std::endl;
+
+
+
+
+
+
+
+	std::cout << "------------------------------------------" << std::endl;
 	return 0;
 }

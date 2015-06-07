@@ -35,19 +35,23 @@ void CommandFactory::createCommands(const char* nameCommand, int indx) {
 		return;
 	}
 	else if (strcmp(nameCommand, "newlines=CRLF") == 0) {
-		this->commands[indx] = new NewLines();
+		bool style = 0;
+		this->commands[indx] = new NewLines(style);
 		return;
 	}
 	else if (strcmp(nameCommand, "newlines=LF") == 0) {
-		this->commands[indx] = new NewLines();
+		bool style = 1;
+		this->commands[indx] = new NewLines(style);
 		return;
 	}
 	else if (strcmp(nameCommand, "identation=tabs") == 0) {
-		this->commands[indx] = new Identation();
+		bool style = 0;
+		this->commands[indx] = new Identation(style);
 		return;
 	}
 	else if (strcmp(nameCommand, "identation=spaces") == 0) {
-		this->commands[indx] = new Identation();
+		bool style = 1;
+		this->commands[indx] = new Identation(style);
 		return;
 	}
 	else if (strcmp(nameCommand, "format") == 0) {

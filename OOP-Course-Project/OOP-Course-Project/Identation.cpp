@@ -6,6 +6,11 @@ Identation::Identation() {
 	std::cout << "[Entering Identation::Identation()]" << std::endl;
 }
 
+Identation::Identation(bool identationStyle) {
+	std::cout << "[Entering Identation::Identation(bool identationStyle)]" << std::endl;
+	this->identationStyle = identationStyle;
+}
+
 Identation::~Identation() {
 	std::cout << "[Entering Identation::~Identation()]" << std::endl;
 }
