@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
 	std::cout << "------------------------------------------" << std::endl;
 
 	//char* currFileName = "test_2.txt";
-	char* currFileName = "test_identation_tabs.txt";
+	char* currFileName = "test_identation_spaces.txt";
 
 	TextManager fileSource(currFileName);
 

@@ -4,6 +4,6 @@ int main() {
 	int counter;
     std::cout << "HELLO!" << std::endl;
     char* name = "pesho";
-	a
+	abv	mercedes
 return 0;
-}
+	}

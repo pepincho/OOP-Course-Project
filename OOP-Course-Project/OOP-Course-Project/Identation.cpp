@@ -54,8 +54,46 @@ void Identation::changeStyle(TextManager& text) {
 					newLine[bam] = '\t';
 					newLine[sizeNewLine - 1] = '\0';
 					text.setLine(newLine, i);
-					//setLine(source, newLine, i);
-					//j += 2;
+				}
+			}
+		}
+		else {
+			for (int j = 0; j < currLineLen; j++) {
+				if (areNextFourSpaces(source[i], j) == true) {
+					//j += 3;
+					continue;
+				}
+				else if (source[i][j] == '\t') {
+					int sizeNewLine = currLineLen + 1 + 1 + 1 + 1;
+					char* newLine = new (std::nothrow) char[sizeNewLine];
+					if (newLine == NULL)
+						return;
+					int currIndx = 0;
+					for (int k = currIndx; k < j; k++) {
+						newLine[currIndx] = source[i][k];
+						currIndx++;
+					}
+					std::cout << "000 line-----> " << source[i][j + 1] << std::endl;
+
+					int bam = currIndx;
+					newLine[currIndx] = ' ';
+					currIndx++;
+					newLine[currIndx] = ' ';
+					currIndx++;
+					newLine[currIndx] = ' ';
+					currIndx++;
+					newLine[currIndx] = ' ';
+					currIndx++;
+					//currIndx += 2;
+					std::cout << "000 line" << source[i] << std::endl;
+					for (int k = j + 1; k < currLineLen; k++) {
+						
+						newLine[currIndx] = source[i][k];
+						currIndx++;
+					}
+
+					newLine[sizeNewLine - 1] = '\0';
+					text.setLine(newLine, i);
 				}
 			}
 		}
@@ -69,10 +107,4 @@ bool Identation::areNextFourSpaces(char* line, int startPos) {
 	else {
 		return false;
 	}
-}
-
-
-void Identation::setLine(char** sourceLines, char* newLine, int atRow) {
-	sourceLines[atRow] = new (std::nothrow) char[strlen(newLine) + 1];
-	strcpy_s(sourceLines[atRow], strlen(newLine) + 1, newLine);
 }

@@ -18,8 +18,4 @@ private:
 	void changeStyle(TextManager& text);
 
 	bool areNextFourSpaces(char*, int);
-
-
-	void setLine(char**, char*, int);
-
 };
