@@ -18,8 +18,9 @@ public:
 	const int getNumberLines() const;
 	
 	const char* getFileName() const;
-private:
+public:
 	int getFileSize(char*);
+private:
 	int getFileNumberLines(char*);
 	void clearSourceLines();
 private:

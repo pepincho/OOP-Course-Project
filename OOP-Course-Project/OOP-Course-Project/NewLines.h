@@ -11,7 +11,9 @@ public:
 
 	virtual void processCommand(TextManager& text);
 private:
-	// 0 -> with \r\n
-	// 1 -> with \n
+	void changeStyle(TextManager& text);
+
+	// 0 -> with \r\n CRLF
+	// 1 -> with \n LF
 	bool newLinesStyle;
 }; 

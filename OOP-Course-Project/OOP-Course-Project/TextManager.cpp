@@ -162,6 +162,7 @@ void TextManager::setLine(char* newLine, int atRow) {
 	
 	//std::cout << "size of newLine in setLine: " << strlen(newLine) << std::endl;
 	this->sourceLines[atRow] = new (std::nothrow) char[strlen(newLine) + 1];
+	//std::cout << "size of new line: " << strlen(newLine) << std::endl;
 	strcpy_s(this->sourceLines[atRow], strlen(newLine) + 1, newLine);
 	//this->sourceLines[atRow][strlen(newLine) + 1] = '\r';
 	//this->sourceLines[atRow][strlen(newLine) + 1 + 1] = '\n';
