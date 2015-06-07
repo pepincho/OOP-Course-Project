@@ -1,0 +1,9 @@
+#include <iostream>
+
+int main() {
+	int counter;
+    std::cout << "HELLO!" << std::endl;
+    char* name = "pesho";
+	a
+return 0;
+}

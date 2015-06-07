@@ -14,4 +14,12 @@ private:
 	// 0 -> with tabs
 	// 1 -> with spaces
 	bool identationStyle;
+
+	void changeStyle(TextManager& text);
+
+	bool areNextFourSpaces(char*, int);
+
+
+	void setLine(char**, char*, int);
+
 };

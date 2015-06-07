@@ -11,21 +11,21 @@ int main(int argc, char* argv[]) {
 	ConsoleInput cmdInput;
 	cmdInput.distinguishConsoleInput(argc, argv);
 
-	std::cout << "The number of Files is " << cmdInput.getNumberFiles() << std::endl;
-	const char** files = cmdInput.getPathsToFiles();
-	for (int i = 0; i < cmdInput.getNumberFiles(); i++) {
-		std::cout << "file[" << i << "] is " << files[i] << std::endl;
-	}
-	std::cout << "The number of Commands is " << cmdInput.getNumberCommands() << std::endl;
-	const char** nameCommands = cmdInput.getCommands();
-	for (int i = 0; i < cmdInput.getNumberCommands(); i++) {
-		std::cout << "command[" << i << "] is " << nameCommands[i] << std::endl;
-	}
+	//std::cout << "The number of Files is " << cmdInput.getNumberFiles() << std::endl;
+	//const char** files = cmdInput.getPathsToFiles();
+	//for (int i = 0; i < cmdInput.getNumberFiles(); i++) {
+	//	std::cout << "file[" << i << "] is " << files[i] << std::endl;
+	//}
+	//std::cout << "The number of Commands is " << cmdInput.getNumberCommands() << std::endl;
+	//const char** nameCommands = cmdInput.getCommands();
+	//for (int i = 0; i < cmdInput.getNumberCommands(); i++) {
+	//	std::cout << "command[" << i << "] is " << nameCommands[i] << std::endl;
+	//}
 
 	std::cout << "------------------------------------------" << std::endl;
 
 	//char* currFileName = "test_2.txt";
-	char* currFileName = "test_new_lines_style_0.txt";
+	char* currFileName = "test_identation_tabs.txt";
 
 	TextManager fileSource(currFileName);
 
@@ -33,7 +33,7 @@ int main(int argc, char* argv[]) {
 	int counterLines = fileSource.getNumberLines();
 
 	for (int i = 0; i < counterLines; i++) {
-		std::cout << "line[" << i << "] -> " << source[i] << std::endl;
+		std::cout << "---line[" << i << "] -> " << source[i] << " len: " << strlen(source[i]) << std::endl;
 	}
 	int counter = 0;
 	for (int i = 0; i < counterLines; i++) {
