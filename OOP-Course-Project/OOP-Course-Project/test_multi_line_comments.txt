@@ -1,5 +1,5 @@
-peshko
 int asan;!/*
 trop trop
 hop hop
 */ char name;
+int az; /* hop */ int op; /* shit */

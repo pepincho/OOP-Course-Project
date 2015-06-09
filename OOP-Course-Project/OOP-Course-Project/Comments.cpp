@@ -13,7 +13,7 @@ Comments::~Comments() {
 void Comments::processCommand(TextManager& text) {
 	std::cout << "processComments on file " << text.getFileName() << std::endl;
 	//removeComment(text);
-	//removeMultiLineComment(text);
+	removeMultiLineComment(text);
 }
 
 void Comments::removeComment(TextManager& text) {
@@ -95,54 +95,90 @@ void Comments::removeMultiLineComment(TextManager& text) {
 	int numLines = text.getNumberLines();
 	bool isInComment = false;
 	
+	int currIndex = 0;
 	for (int i = 0; i < numLines; i++) {
-		int currLineLen = strlen((char*)text.getFileLines()[i]);
-		std::cout << "on line: " << source[i] << std::endl;
+		//std::cout << "on line: " << source[i] << std::endl;
+		int currLineLen = strlen(source[i]);
 
-		if (hasOpeningComment((char*)text.getFileLines()[i], currLineLen) == true) {
-			isInComment = true;
-			std::cout << "zapochva komentara" << std::endl;
-			continue;
+		if (hasOpeningComment(source[currIndex], strlen(source[currIndex])) == true) {
+			currLineLen = strlen(source[currIndex]);
 
-			//int startColumnComment = findStartMultiLineComment(source[i], currLineLen);
-			//int endColumnComment = findEndMultiLineComment(source[i], currLineLen);
+			for (int p = 0; p < currLineLen - 1; p++) {
+
+				if (source[currIndex][p] == '*' && source[currIndex][p + 1] == '/') {
+					currLineLen = strlen(source[currIndex]);
+
+					int startColumnComment = findStartMultiLineComment(source[currIndex], currLineLen);
+					int endColumnComment = findEndMultiLineComment(source[currIndex], currLineLen);
+					int sizeCurrNewLine = currLineLen - (endColumnComment - startColumnComment);
+
+					char* currNewLine = new (std::nothrow) char[sizeCurrNewLine + 1];
+					if (currNewLine == NULL)
+						return;
+
+					makeNewLine(source[currIndex], currLineLen, startColumnComment, endColumnComment - 1, currNewLine);
+					currNewLine[sizeCurrNewLine] = '\0';
+
+					text.setLine(currNewLine, currIndex);
+				}
+			}
+
+
+			currLineLen = strlen(source[currIndex]);
+			//std::cout << "zapochva komentara" << std::endl;
+
+			int startColumnComment = findStartMultiLineComment(source[currIndex], currLineLen);
+			int endColumnComment = findEndMultiLineComment(source[currIndex], currLineLen);
 			//std::cout << "startColumnComment: " << startColumnComment << std::endl;
 			//std::cout << "endColumnComment: " << endColumnComment << std::endl;
 
-			//int sizeCurrNewLine = currLineLen - (endColumnComment - startColumnComment);
+			int sizeCurrNewLine = currLineLen - (endColumnComment - startColumnComment);
 
-			//char* currNewLine = new (std::nothrow) char[sizeCurrNewLine + 1];
-			//if (currNewLine == NULL)
-			//	return;
+			char* currNewLine = new (std::nothrow) char[sizeCurrNewLine + 1];
+			if (currNewLine == NULL)
+				return;
 
-			//makeNewLine(source[i], currLineLen, startColumnComment, endColumnComment - 1, currNewLine);
-			////currNewLine[sizeCurrNewLine] = '\0';
-			//currNewLine[sizeCurrNewLine - 1] = '\0';
-			//text.setLine(currNewLine, i);
-		}
-		if (hasClosingComment((char*)text.getFileLines()[i], currLineLen) == true) {
-			isInComment = false;
-			std::cout << "svurshva komentara" << std::endl;
+			makeNewLine(source[currIndex], currLineLen, startColumnComment, endColumnComment - 1, currNewLine);
+			currNewLine[sizeCurrNewLine] = '\0';
+			//currNewLine[sizeCurrNewLine - 1] = '\n';
+			//currNewLine[sizeCurrNewLine - 2] = '\r';
+			text.setLine(currNewLine, currIndex);
+
+			isInComment = true;
+			currIndex++;
 			continue;
+		}
+		if (hasClosingComment(source[currIndex], strlen(source[currIndex])) == true) {
+			
+			currLineLen = strlen(source[currIndex]);
 
-			//int startColumnComment = findEndMultiLineComment(source[i], currLineLen);
+			//std::cout << "svurshva komentara" << std::endl;
+			
+			int endColumnComment = findEndMultiLineComment(source[currIndex], currLineLen);
+			int sizeCurrNewLine = currLineLen - endColumnComment - 1;
 
-			//int sizeCurrNewLine = currLineLen - startColumnComment;
+			char* currNewLine = new (std::nothrow) char[sizeCurrNewLine + 1];
+			if (currNewLine == NULL)
+				return;
 
-			//char* currNewLine = new (std::nothrow) char[sizeCurrNewLine + 1];
+			makeNewLine(source[currIndex], currLineLen, 0, endColumnComment, currNewLine);
+			//makeNewLine(source[currIndex], currLineLen, endColumnComment, currLineLen - 1, currNewLine);
 
-			//if (currNewLine == NULL)
-			//	return;
-
-			//makeNewLine(source[i], currLineLen, startColumnComment, startColumnComment, currNewLine);
+			currNewLine[sizeCurrNewLine] = '\0';
 			//currNewLine[sizeCurrNewLine - 1] = '\0';
-			//text.setLine(currNewLine, i);
+			text.setLine(currNewLine, currIndex);
+
+			currIndex++;
+			isInComment = false;
+			continue;
 
 		}
 		if (isInComment == true) {
-			text.removeLine(i);
+			text.removeLine(currIndex);
+			//currIndex++;
+			//i -= 1;
 			//numLines -= 1;
-			std::cout << "v komentara" << std::endl;
+			//std::cout << "v komentara" << std::endl;
 		}
 	}
 }

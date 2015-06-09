@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
 	std::cout << "------------------------------------------" << std::endl;
 
 	//char* currFileName = "test_2.txt";
-	char* currFileName = "test_identation_tabs.txt";
+	char* currFileName = "test_multi_line_comments.txt";
 
 	TextManager fileSource(currFileName);
 
@@ -78,14 +78,3 @@ int main(int argc, char* argv[]) {
 	std::cout << "------------------------------------------" << std::endl;
 	return 0;
 }
-
-
-
-
-//#include <iostream>
-//
-//int main() {
-//	int counter;
-//	std::cout << "HELLO!" << std::endl;
-//	char* name = "pesho";
-//	abv    a    a	pak
