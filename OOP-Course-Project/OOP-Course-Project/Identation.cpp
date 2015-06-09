@@ -31,6 +31,7 @@ void Identation::changeStyle(TextManager& text) {
 		//
 		if (this->identationStyle == 0) {
 			for (int j = 0; j < currLineLen; j++) {
+				currLineLen = strlen(source[i]);
 				//std::cout << "<------>currLine: " << source[i] << std::endl;
 				if (source[i][j] == '\t') {
 					continue;
@@ -59,6 +60,7 @@ void Identation::changeStyle(TextManager& text) {
 		}
 		else {
 			for (int j = 0; j < currLineLen; j++) {
+				currLineLen = strlen(source[i]);
 				if (areNextFourSpaces(source[i], j) == true) {
 					//j += 3;
 					continue;
@@ -69,11 +71,11 @@ void Identation::changeStyle(TextManager& text) {
 					if (newLine == NULL)
 						return;
 					int currIndx = 0;
-					for (int k = currIndx; k < j; k++) {
-						newLine[currIndx] = source[i][k];
+					for (int k = 0; k < j; k++) {
+						newLine[k] = source[i][k];
 						currIndx++;
 					}
-					std::cout << "000 line-----> " << source[i][j + 1] << std::endl;
+					//std::cout << "000 line-----> " << source[i][j + 1] << std::endl;
 
 					int bam = currIndx;
 					newLine[currIndx] = ' ';
@@ -85,7 +87,7 @@ void Identation::changeStyle(TextManager& text) {
 					newLine[currIndx] = ' ';
 					currIndx++;
 					//currIndx += 2;
-					std::cout << "000 line" << source[i] << std::endl;
+					//std::cout << "000 line" << source[i] << std::endl;
 					for (int k = j + 1; k < currLineLen; k++) {
 						
 						newLine[currIndx] = source[i][k];
@@ -94,6 +96,7 @@ void Identation::changeStyle(TextManager& text) {
 
 					newLine[sizeNewLine - 1] = '\0';
 					text.setLine(newLine, i);
+					std::cout << "text line after ... " << std::endl;
 				}
 			}
 		}

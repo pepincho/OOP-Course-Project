@@ -1,9 +1,3 @@
-#include <iostream>
-        
-int main() {
-	int counter;
-    std::cout << "HELLO!" << std::endl;
-    	char* name = "pesho";
-    abv    a    a	pak
+a    b   c     opa
 return 0;
 }

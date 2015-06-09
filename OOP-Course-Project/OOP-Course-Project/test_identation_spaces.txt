@@ -2,8 +2,7 @@
 
 int main() {
 	int counter;
-    std::cout << "HELLO!" << std::endl;
-    char* name = "pesho";
-	abv	mercedes
-return 0;
-	}
+	std::cout << "HELLO!" << std::endl;
+	char* name = "pesho";
+	abv	mercedes	hop    a	
+}
