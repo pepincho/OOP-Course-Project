@@ -64,15 +64,15 @@ void TextManager::readToFile(char* fileName) {
 				currentIndex = 0;
 			}
 			else {
-				//if (c == 0xBB || c == 0xBF || c == 0xEF) {
-				//	std::cout << "hop" << std::endl;
-				//	this->sourceLines[currentLine][currentIndex] = '\0';
-				//	currentIndex++;
-				//	continue;
-				//}
 				this->sourceLines[currentLine][currentIndex] = c;
 				this->sourceLines[currentLine][currentIndex + 1] = '\0';
 				currentIndex++;
+			}
+		}
+		else {
+			if (c == '\n') {
+				this->sourceLines[currentLine][currentIndex] = c;
+				this->sourceLines[currentLine][currentIndex + 1] = '\0';
 			}
 		}
 	}
