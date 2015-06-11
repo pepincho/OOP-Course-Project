@@ -12,33 +12,32 @@ int main(int argc, char* argv[]) {
 	cmdInput.distinguishConsoleInput(argc, argv);
 
 	//std::cout << "The number of Files is " << cmdInput.getNumberFiles() << std::endl;
-	//const char** files = cmdInput.getPathsToFiles();
+	//char** files = cmdInput.getPathsToFiles();
 	//for (int i = 0; i < cmdInput.getNumberFiles(); i++) {
 	//	std::cout << "file[" << i << "] is " << files[i] << std::endl;
 	//}
 	//std::cout << "The number of Commands is " << cmdInput.getNumberCommands() << std::endl;
-	//const char** nameCommands = cmdInput.getCommands();
+	//char** nameCommands = cmdInput.getCommands();
 	//for (int i = 0; i < cmdInput.getNumberCommands(); i++) {
 	//	std::cout << "command[" << i << "] is " << nameCommands[i] << std::endl;
 	//}
 
 	std::cout << "------------------------------------------" << std::endl;
 
-	char* currFileName = "test_multi_line_comments_2.txt";
+	//char* currFileName = "test.txt";
+	char* currFileName = "test_multi_line_comments.txt";
 
 	TextManager fileSource(currFileName);
-
 	char** source = fileSource.getFileLines();
 	int counterLines = fileSource.getNumberLines();
+	int sizeSource = 0;
+	std::cout << "The file has " << fileSource.getNumberLines() << " lines." << std::endl;
+	for (int i = 0; i < counterLines; i++) {
+		std::cout << "<>line[" << i << "] -> " << source[i] << " len: " << strlen(source[i]) << std::endl;
+		sizeSource += strlen(source[i]);
+	}
+	std::cout << "Size of the file before commands: " << sizeSource << std::endl;
 
-	for (int i = 0; i < counterLines; i++) {
-		std::cout << "---line[" << i << "] -> " << source[i] << " len: " << strlen(source[i]) << std::endl;
-	}
-	int counter = 0;
-	for (int i = 0; i < counterLines; i++) {
-		counter += strlen(source[i]);
-	}
-	std::cout << "SIZE OF THE FILE BEFORE COMMANDS: " << counter << std::endl;
 	std::cout << "------------------------------------------" << std::endl;
 
 	CommandFactory commandFac(cmdInput.getCommands(), cmdInput.getNumberCommands());
@@ -50,31 +49,15 @@ int main(int argc, char* argv[]) {
 
 	std::cout << "------------------------------------------" << std::endl;
 
-	char** sourceAfter = fileSource.getFileLines();
-	counterLines = fileSource.getNumberLines();
-	
-	//for (int i = 0; i < counterLines; i++) {
-	//	std::cout << "<> line[" << i << "] -> " << source[i] << std::endl;
-	//}
-
-	std::cout << "------------------------------------------" << std::endl;
-
-	//std::cout << "size " << strlen(sourceAfter[5]) << std::endl;
-	//std::cout << "check " << sourceAfter[5] << std::endl;
-
-	int counterSymbols = 0;
-	
-	for (int i = 0; i < counterLines; i++) {
-		counterSymbols += strlen(sourceAfter[i]);
+	char** newSource = fileSource.getFileLines();
+	int counterNewLines = fileSource.getNumberLines();
+	int sizeNewSource = 0;
+	std::cout << "The file has " << fileSource.getNumberLines() << " lines." << std::endl;
+	for (int i = 0; i < counterNewLines; i++) {
+		std::cout << "<>line[" << i << "] -> " << newSource[i] << " len: " << strlen(newSource[i]) << std::endl;
+		sizeNewSource += strlen(newSource[i]);
 	}
-
-	std::cout << "SIZE OF THE FILE AFTER COMMANDS: " << counterSymbols << std::endl;
-
-	for (int i = 0; i < counterLines; i++) {
-		std::cout << "<> line[" << i << "] -> " << source[i] << " len: " << strlen(source[i]) << std::endl;
-	}
-
-	//fileSource.writeToFile(currFileName);
+	std::cout << "Size of the file after commands: " << sizeNewSource << std::endl;
 
 	std::cout << "------------------------------------------" << std::endl;
 	return 0;
