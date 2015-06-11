@@ -4,9 +4,9 @@
 
 
 Command::Command() {
-	std::cout << "[Entering Command::Command()]" << std::endl;
+	//std::cout << "[Entering Command::Command()]" << std::endl;
 }
 
 Command::~Command() {
-	std::cout << "[Entering Command::~Command()]" << std::endl;
+	//std::cout << "[Entering Command::~Command()]" << std::endl;
 }

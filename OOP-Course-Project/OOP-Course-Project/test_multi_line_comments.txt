@@ -1,5 +1,11 @@
-int asan;!/*
+
+aa/* blq blq abadsa */bb
+/* gogo */
+
+    	int asan;!/*
 trop trop
-hop hop
-*/ char name;
+
+    hop hop
+	*/ char name;
+}
 int az; /* hop */ int op; /* shit */

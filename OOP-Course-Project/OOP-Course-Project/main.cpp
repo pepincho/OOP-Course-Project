@@ -24,12 +24,11 @@ int main(int argc, char* argv[]) {
 
 	std::cout << "------------------------------------------" << std::endl;
 
-	//char* currFileName = "test_2.txt";
-	char* currFileName = "test_multi_line_comments.txt";
+	char* currFileName = "test_multi_line_comments_2.txt";
 
 	TextManager fileSource(currFileName);
 
-	char** source = (char**) fileSource.getFileLines();
+	char** source = fileSource.getFileLines();
 	int counterLines = fileSource.getNumberLines();
 
 	for (int i = 0; i < counterLines; i++) {
@@ -51,7 +50,7 @@ int main(int argc, char* argv[]) {
 
 	std::cout << "------------------------------------------" << std::endl;
 
-	char** sourceAfter = (char**)fileSource.getFileLines();
+	char** sourceAfter = fileSource.getFileLines();
 	counterLines = fileSource.getNumberLines();
 	
 	//for (int i = 0; i < counterLines; i++) {
@@ -74,6 +73,8 @@ int main(int argc, char* argv[]) {
 	for (int i = 0; i < counterLines; i++) {
 		std::cout << "<> line[" << i << "] -> " << source[i] << " len: " << strlen(source[i]) << std::endl;
 	}
+
+	//fileSource.writeToFile(currFileName);
 
 	std::cout << "------------------------------------------" << std::endl;
 	return 0;

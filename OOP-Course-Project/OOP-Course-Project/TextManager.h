@@ -11,14 +11,13 @@ public:
 public:
 	void removeLine(int);
 	void setLine(char*, int);
-	const char* getLine(size_t) const;
+	char* getLine(size_t) const;
 	void insertLine(char*, int);
 public:
-	const char** getFileLines() const;
-	const int getNumberLines() const;
-	
-	const char* getFileName() const;
-public:
+	char** getFileLines() const;
+	int getNumberLines() const;
+
+	char* getFileName() const;
 	int getFileSize(char*);
 private:
 	int getFileNumberLines(char*);

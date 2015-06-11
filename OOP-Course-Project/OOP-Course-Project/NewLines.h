@@ -16,4 +16,4 @@ private:
 	// 0 -> with \r\n CRLF
 	// 1 -> with \n LF
 	bool newLinesStyle;
-}; 
+};

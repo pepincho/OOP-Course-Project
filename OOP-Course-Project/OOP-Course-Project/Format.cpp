@@ -3,11 +3,11 @@
 #include <iostream>
 
 Format::Format() {
-	std::cout << "[Entering Format::Format()]" << std::endl;
+	//std::cout << "[Entering Format::Format()]" << std::endl;
 }
 
 Format::~Format() {
-	std::cout << "[Entering Format::~Format()]" << std::endl;
+	//std::cout << "[Entering Format::~Format()]" << std::endl;
 }
 
 void Format::processCommand(TextManager& text) {

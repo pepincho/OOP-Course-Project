@@ -4,11 +4,11 @@
 #include <cstring>
 
 CommandFactory::CommandFactory() {
-	std::cout << "[Entering CommandFactory::CommandFactory()]" << std::endl;
+	//std::cout << "[Entering CommandFactory::CommandFactory()]" << std::endl;
 }
 
 CommandFactory::~CommandFactory() {
-	std::cout << "[Entering CommandFactory::~CommandFactory()]" << std::endl;
+	//std::cout << "[Entering CommandFactory::~CommandFactory()]" << std::endl;
 	clearCommands();
 }
 
@@ -19,8 +19,8 @@ void CommandFactory::clearCommands() {
 	delete[] commands;
 }
 
-CommandFactory::CommandFactory(const char** arrCommands, int sizeArrCommands) {
-	std::cout << "[Entering CommandFactory::CommandFactory(const char** arrCommands, int sizeArrCommands)]" << std::endl;
+CommandFactory::CommandFactory(char** arrCommands, int sizeArrCommands) {
+	//std::cout << "[Entering CommandFactory::CommandFactory(const char** arrCommands, int sizeArrCommands)]" << std::endl;
 	this->numberCommands = sizeArrCommands;
 	this->commands = new (std::nothrow) Command*[this->numberCommands];
 
@@ -29,7 +29,7 @@ CommandFactory::CommandFactory(const char** arrCommands, int sizeArrCommands) {
 	}
 }
 
-void CommandFactory::createCommands(const char* nameCommand, int indx) {
+void CommandFactory::createCommands(char* nameCommand, int indx) {
 	if (strcmp(nameCommand, "comments") == 0) {
 		this->commands[indx] = new Comments();
 		return;
@@ -70,14 +70,6 @@ void CommandFactory::createCommands(const char* nameCommand, int indx) {
 const int CommandFactory::getNumberCommands() const {
 	return (const int) this->numberCommands;
 }
-
-//const Command* CommandFactory::getCommand(int indx) const {
-//	return this->commands[indx];
-//}
-
-//const Command& CommandFactory::operator[](int index) const {
-//	return this->commands[index];
-//}
 
 Command** CommandFactory::getCommands() const {
 	return (Command**) this->commands;

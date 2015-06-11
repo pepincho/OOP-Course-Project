@@ -3,16 +3,16 @@
 #include <iostream>
 
 Identation::Identation() {
-	std::cout << "[Entering Identation::Identation()]" << std::endl;
+	//std::cout << "[Entering Identation::Identation()]" << std::endl;
 }
 
 Identation::Identation(bool identationStyle) {
-	std::cout << "[Entering Identation::Identation(bool identationStyle)]" << std::endl;
+	//std::cout << "[Entering Identation::Identation(bool identationStyle)]" << std::endl;
 	this->identationStyle = identationStyle;
 }
 
 Identation::~Identation() {
-	std::cout << "[Entering Identation::~Identation()]" << std::endl;
+	//std::cout << "[Entering Identation::~Identation()]" << std::endl;
 }
 
 void Identation::processCommand(TextManager& text) {
@@ -22,9 +22,9 @@ void Identation::processCommand(TextManager& text) {
 }
 
 void Identation::changeStyle(TextManager& text) {
-	char** source = (char**)text.getFileLines();
+	char** source = text.getFileLines();
 	int numberLines = text.getNumberLines();
-	std::cout << "style: " << this->identationStyle << std::endl;
+	//std::cout << "style: " << this->identationStyle << std::endl;
 	for (int i = 0; i < numberLines; i++) {
 		int currLineLen = strlen(source[i]);
 		//
@@ -89,14 +89,14 @@ void Identation::changeStyle(TextManager& text) {
 					//currIndx += 2;
 					//std::cout << "000 line" << source[i] << std::endl;
 					for (int k = j + 1; k < currLineLen; k++) {
-						
+
 						newLine[currIndx] = source[i][k];
 						currIndx++;
 					}
 
 					newLine[sizeNewLine - 1] = '\0';
 					text.setLine(newLine, i);
-					std::cout << "text line after ... " << std::endl;
+					//std::cout << "text line after ... " << std::endl;
 				}
 			}
 		}

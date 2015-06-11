@@ -3,16 +3,16 @@
 #include <iostream>
 
 NewLines::NewLines() {
-	std::cout << "[Entering NewLines::NewLines()]" << std::endl;
+	//std::cout << "[Entering NewLines::NewLines()]" << std::endl;
 }
 
 NewLines::NewLines(bool newLinesStyle) {
-	std::cout << "[Entering NewLines::NewLines(bool newLinesStyle)]" << std::endl;
+	//std::cout << "[Entering NewLines::NewLines(bool newLinesStyle)]" << std::endl;
 	this->newLinesStyle = newLinesStyle;
 }
 
 NewLines::~NewLines() {
-	std::cout << "[Entering NewLines::~NewLines()]" << std::endl;
+	//std::cout << "[Entering NewLines::~NewLines()]" << std::endl;
 }
 
 void NewLines::processCommand(TextManager& text) {
@@ -21,9 +21,9 @@ void NewLines::processCommand(TextManager& text) {
 }
 
 void NewLines::changeStyle(TextManager& text) {
-	char** source = (char**) text.getFileLines();
+	char** source = (char**)text.getFileLines();
 	int numberLines = text.getNumberLines();
-	std::cout << "style: " << this->newLinesStyle << std::endl;
+	//std::cout << "style: " << this->newLinesStyle << std::endl;
 	for (int i = 0; i < numberLines; i++) {
 		int currLineLen = strlen(source[i]);
 		//

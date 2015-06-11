@@ -9,20 +9,16 @@
 #include "Format.h"
 #include "Html.h"
 
-
 class CommandFactory {
 public:
 	CommandFactory();
-	CommandFactory(const char** arrCommands, int sizeArrCommands);
+	CommandFactory(char** arrCommands, int sizeArrCommands);
 	~CommandFactory();
 public:
-	void createCommands(const char* nameCommand, int);
+	void createCommands(char* nameCommand, int);
 	const int getNumberCommands() const;
 
 	Command** getCommands() const;
-
-	//const Command* getCommand(int) const;
-	//const Command& operator[](int index) const;
 private:
 	void clearCommands();
 private:

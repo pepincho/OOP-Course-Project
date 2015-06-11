@@ -7,11 +7,11 @@ public:
 public:
 	void distinguishConsoleInput(int argc, char* argv[]);
 public:
-	const int getNumberFiles() const;
-	const int getNumberCommands() const;
+	int getNumberFiles() const;
+	int getNumberCommands() const;
 public:
-	const char** getPathsToFiles() const;
-	const char** getCommands() const;
+	char** getPathsToFiles() const;
+	char** getCommands() const;
 private:
 	bool isCommand(char*);
 	void copyCommand(char*, const char*);

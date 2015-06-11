@@ -16,11 +16,12 @@ private:
 	// remove multi-line comment -> /* */ style
 	void removeMultiLineComment(TextManager& text);
 
-	//void makeNewLine(char* line, int currLineLen, int startComment, int endComment, char* newLine, int newLineSize);
 	void makeNewLine(char* line, int currLineLen, int startComment, int endComment, char* newLine);
 
 	int findStartComment(char*, int);
 	int findEndComment(char*, int);
+	
+	bool hasComment(char*, int);
 
 	bool hasOpeningComment(char*, int);
 	bool hasClosingComment(char*, int);
@@ -29,6 +30,4 @@ private:
 	int findEndMultiLineComment(char*, int);
 
 	bool hasMultiLineComment(char*, int);
-
-	bool hasComment(char*, int);
 };

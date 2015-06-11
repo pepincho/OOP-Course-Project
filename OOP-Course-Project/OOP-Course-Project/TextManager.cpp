@@ -8,13 +8,13 @@ TextManager::TextManager() {
 	this->sourceLines = NULL;
 	this->numberLines = 0;
 	this->fileName = NULL;
-	std::cout << "TextManager::TextManager()" << std::endl;
+	//std::cout << "TextManager::TextManager()" << std::endl;
 }
 
 TextManager::~TextManager() {
 	clearSourceLines();
 	delete[] this->fileName;
-	std::cout << "TextManager::~TextManager()" << std::endl;
+	//std::cout << "TextManager::~TextManager()" << std::endl;
 }
 
 void TextManager::clearSourceLines() {
@@ -28,13 +28,11 @@ void TextManager::clearSourceLines() {
 
 void TextManager::readToFile(char* fileName) {
 	int fileSize = getFileSize(fileName);
-	std::cout << "The size of the file is " << fileSize << std::endl;
 
 	// here I can check If the file is too big and return an error with msg
 
 	int counterLines = getFileNumberLines(fileName);
 	this->numberLines = counterLines;
-	std::cout << "The file has " << counterLines << " lines." << std::endl;
 
 	this->sourceLines = new (std::nothrow) char*[this->numberLines];
 	if (sourceLines == NULL)
@@ -55,7 +53,7 @@ void TextManager::readToFile(char* fileName) {
 
 	while (myFile) {
 		myFile.get(c);
-		
+
 		if (myFile) {
 			if (c == '\n') {
 				this->sourceLines[currentLine][currentIndex] = c;
@@ -98,7 +96,7 @@ int TextManager::getFileNumberLines(char* fileName) {
 		std::cerr << "Error!" << std::endl;
 		return 0;
 	}
-	
+
 	char c;
 	int counterLines = 1;
 
@@ -152,20 +150,13 @@ void TextManager::insertLine(char* line, int atRow) {
 	delete[] temp;
 }
 
-const char* TextManager::getLine(size_t atRow) const {
-	return (const char*) this->sourceLines[atRow];
+char* TextManager::getLine(size_t atRow) const {
+	return this->sourceLines[atRow];
 }
 
 void TextManager::setLine(char* newLine, int atRow) {
-	//newLine = "#include <iostream> peshko";
-	//this->sourceLines[atRow] = new (std::nothrow) char[strlen(newLine) + 1 + 2];
-	
-	//std::cout << "size of newLine in setLine: " << strlen(newLine) << std::endl;
 	this->sourceLines[atRow] = new (std::nothrow) char[strlen(newLine) + 1];
-	//std::cout << "size of new line: " << strlen(newLine) << std::endl;
 	strcpy_s(this->sourceLines[atRow], strlen(newLine) + 1, newLine);
-	//this->sourceLines[atRow][strlen(newLine) + 1] = '\r';
-	//this->sourceLines[atRow][strlen(newLine) + 1 + 1] = '\n';
 }
 
 void TextManager::removeLine(int atRow) {
@@ -185,11 +176,11 @@ void TextManager::writeToFile(char* &currFileName) {
 	strcpy_s(newName, newLenNameFile, currFileName);
 	char* toOldName = ".old";
 	char newText[50];
-	
+
 	strcpy(newText, currFileName);
 	strcat(newText, toOldName);
 	std::cout << "The new name of the file is " << newText << std::endl;
-	
+
 	rename(currFileName, newText);
 
 	std::ofstream myTextFile(newName, std::ios::binary | std::ios::out, std::ios::trunc);
@@ -199,32 +190,30 @@ void TextManager::writeToFile(char* &currFileName) {
 	}
 
 	for (int i = 0; i < this->numberLines; i++) {
-	//myTextFile.write((const char*)&this->sourceLines, sizeof(this->sourceLines));
-		//myTextFile << sourceLines[i];
-		//myTextFile.write((const char*)&this->sourceLines[i], sizeof(this->sourceLines[i]));
+		myTextFile.write((const char*)this->sourceLines[i], strlen(this->sourceLines[i]));
 	}
 
 	myTextFile.close();
 }
 
-const char** TextManager::getFileLines() const {
-	return (const char**) this->sourceLines;
+char** TextManager::getFileLines() const {
+	return this->sourceLines;
 }
 
-const int TextManager::getNumberLines() const {
-	std::cout << "number of lines: " << this->numberLines << std::endl;
-	return (const int) this->numberLines;
+int TextManager::getNumberLines() const {
+	return this->numberLines;
 }
 
-const char* TextManager::getFileName() const {
-	return (const char*) this->fileName;
+char* TextManager::getFileName() const {
+	return this->fileName;
 }
 
 TextManager::TextManager(char* fileName) {
+	//std::cout << "TextManager::TextManager(char* fileName)" << std::endl;
 	this->fileName = new (std::nothrow) char[strlen(fileName) + 1];
 	if (this->fileName == NULL)
 		return;
 	strcpy_s(this->fileName, strlen(fileName) + 1, fileName);
-	
+
 	readToFile(this->fileName);
 }

@@ -9,13 +9,13 @@ ConsoleInput::ConsoleInput() {
 	this->numberCommands = 0;
 	this->pathsToFiles = NULL;
 	this->commands = NULL;
-	std::cout << "ConsoleInput::ConsoleInput()" << std::endl;
+	//std::cout << "ConsoleInput::ConsoleInput()" << std::endl;
 }
 
 ConsoleInput::~ConsoleInput() {
 	clearPathsToFiles();
 	clearCommands();
-	std::cout << "ConsoleInput::~ConsoleInput()" << std::endl;
+	//std::cout << "ConsoleInput::~ConsoleInput()" << std::endl;
 }
 
 void ConsoleInput::clearPathsToFiles() {
@@ -51,7 +51,7 @@ void ConsoleInput::distinguishConsoleInput(int argc, char* argv[]) {
 
 	this->numberFiles = counterFiles;
 	this->numberCommands = counterCommands;
-	
+
 	this->commands = new char*[this->numberCommands];
 	this->pathsToFiles = new char*[this->numberFiles];
 
@@ -85,18 +85,18 @@ bool ConsoleInput::isCommand(char* item) {
 	return item[0] == '-' && item[1] == '-';
 }
 
-const int ConsoleInput::getNumberFiles() const {
+int ConsoleInput::getNumberFiles() const {
 	return this->numberFiles;
 }
 
-const int ConsoleInput::getNumberCommands() const {
+int ConsoleInput::getNumberCommands() const {
 	return this->numberCommands;
 }
 
-const char** ConsoleInput::getPathsToFiles() const {
-	return (const char**)this->pathsToFiles;
+char** ConsoleInput::getPathsToFiles() const {
+	return this->pathsToFiles;
 }
 
-const char** ConsoleInput::getCommands() const {
-	return (const char**)this->commands;
+char** ConsoleInput::getCommands() const {
+	return this->commands;
 }
