@@ -17,6 +17,8 @@ public:
 	// 4) numbers will be in black color
 	// 5) character literals will be in pink color
 	//
+private:
+	char* makeInitialHtmlFile();
 public:
 	void generateHtmlFile(TextManager& text);
 };
