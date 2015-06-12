@@ -160,14 +160,22 @@ void TextManager::setLine(char* newLine, int atRow) {
 }
 
 void TextManager::removeLine(int atRow) {
-	int newNumLines = this->numberLines - 1;
+	//int newNumLines = this->numberLines - 1;
 
-	for (int i = atRow; i < this->numberLines - 1; i++) {
-		size_t currLen = strlen(this->sourceLines[i + 1]) + 1;
-		strcpy_s(this->sourceLines[i], currLen, this->sourceLines[i + 1]);
-	}
-	delete[] sourceLines[this->numberLines - 1];
-	this->numberLines = newNumLines;
+	//for (int i = atRow; i < this->numberLines - 1; i++) {
+	//	size_t currLen = strlen(this->sourceLines[i + 1]) + 1;
+	//	strcpy_s(this->sourceLines[i], currLen, this->sourceLines[i + 1]);
+	//}
+	//delete[] sourceLines[this->numberLines - 1];
+	//this->numberLines = newNumLines;
+
+	//this->sourceLines[atRow] == NULL;
+
+	delete[] sourceLines[atRow];
+	sourceLines[atRow] = new (std::nothrow) char[2 + 1];
+	sourceLines[atRow][0] = '\r';
+	sourceLines[atRow][1] = '\n';
+	sourceLines[atRow][2] = '\0';
 }
 
 void TextManager::writeToFile(char* &currFileName) {

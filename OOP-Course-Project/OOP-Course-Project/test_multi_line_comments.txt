@@ -1,6 +1,6 @@
 aa/* blq blq abadsa */bb
 /* gogo */
-
+//peshko
     	int asan;!/*
 trop trop
 

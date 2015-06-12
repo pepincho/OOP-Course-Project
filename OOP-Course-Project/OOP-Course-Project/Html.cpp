@@ -38,28 +38,26 @@ void Html::generateHtmlFile(TextManager& text) {
 	strcpy(newText, newName);
 	strcat(newText, toNewHtmlName);
 	std::cout << "The new name of the file is " << newText << std::endl;
-	//std::cout << "The new name of the file is " << strlen(newText) << std::endl;
-	//std::cout << "The new name of the file is " << newText[strlen(newText)] << std::endl;
 
 	char** source = text.getFileLines();
 	int numberLines = text.getNumberLines();
 
-	std::ofstream myTextFile(newName, std::ios::binary | std::ios::out, std::ios::trunc);
-	if (!myTextFile) {
-		std::cerr << "Error!" << std::endl;
-		return;
-	}
-	char* bam = makeInitialHtmlFile();
-	myTextFile.write((const char*)bam, strlen(bam));
-	for (int i = 0; i < numberLines; i++) {
-		myTextFile.write((const char*)"<p>", strlen("<p>"));
-		myTextFile.write((const char*)source[i], strlen(source[i]));
-		myTextFile.write((const char*)"</p>", strlen("</p>"));
-	}
-	myTextFile.write((const char*)"</body>", strlen("</body>"));
-	myTextFile.write((const char*)"</html>", strlen("</html>"));
+	//std::ofstream myTextFile(newText, std::ios::binary | std::ios::out, std::ios::trunc);
+	//if (!myTextFile) {
+	//	std::cerr << "Error!" << std::endl;
+	//	return;
+	//}
+	//char* bam = makeInitialHtmlFile();
+	//myTextFile.write((const char*)bam, strlen(bam));
+	//for (int i = 0; i < numberLines; i++) {
+	//	myTextFile.write((const char*)"<p>", strlen("<p>"));
+	//	myTextFile.write((const char*)source[i], strlen(source[i]));
+	//	myTextFile.write((const char*)"</p>", strlen("</p>"));
+	//}
+	//myTextFile.write((const char*)"</body>", strlen("</body>"));
+	//myTextFile.write((const char*)"</html>", strlen("</html>"));
 
-	myTextFile.close();
+	//myTextFile.close();
 }
 
 char* Html::makeInitialHtmlFile() {

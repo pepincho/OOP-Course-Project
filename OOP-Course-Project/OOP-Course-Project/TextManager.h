@@ -24,7 +24,6 @@ private:
 	void clearSourceLines();
 private:
 	char** sourceLines;
-	int numberLines;
-
 	char* fileName;
+	int numberLines;
 };

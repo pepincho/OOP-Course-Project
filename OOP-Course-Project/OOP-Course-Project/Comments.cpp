@@ -14,6 +14,8 @@ void Comments::processCommand(TextManager& text) {
 	std::cout << "processComments on file " << text.getFileName() << std::endl;
 	removeComment(text);
 	removeMultiLineComment(text);
+
+	removeEmptyLines(text);
 }
 
 void Comments::removeComment(TextManager& text) {
@@ -97,11 +99,24 @@ void Comments::removeMultiLineComment(TextManager& text) {
 
 	int currIndex = 0;
 	for (int i = 0; i < numLines; i++) {
+	//while (currIndex < numLines) {
 		//std::cout << "on line: " << source[i] << std::endl;
+		
+		//if (source[currIndex] != NULL) {
+
+		//std::cout << "currIndex: " << currIndex << std::endl;
+
 		int currLineLen = strlen(source[currIndex]);
 
 		if (hasOpeningComment(source[currIndex], strlen(source[currIndex])) == true) {
 			currLineLen = strlen(source[currIndex]);
+
+			if (hasClosingComment(source[currIndex], strlen(source[currIndex])) == true) {
+				isInComment = false;
+			}
+			else {
+				isInComment = true;
+			}
 
 			int startColumnComment = findStartMultiLineComment(source[currIndex], currLineLen);
 			int endColumnComment = findEndMultiLineComment(source[currIndex], currLineLen);
@@ -118,7 +133,8 @@ void Comments::removeMultiLineComment(TextManager& text) {
 			currNewLine[sizeCurrNewLine] = '\0';
 			text.setLine(currNewLine, currIndex);
 
-			isInComment = true;
+
+
 			currIndex++;
 			continue;
 		}
@@ -142,11 +158,22 @@ void Comments::removeMultiLineComment(TextManager& text) {
 			continue;
 		}
 		else if (isInComment == true) {
+			//std::cout << "currIndex: " << currIndex << std::endl;
 			text.removeLine(currIndex);
+			currIndex++;
+			continue;
+			//
+			//currIndex++;
+			//continue;
 		}
 		else {
 			currIndex++;
+			continue;
 		}
+		currIndex++;
+		//}
+
+	//}
 	}
 }
 
@@ -205,4 +232,18 @@ bool Comments::hasClosingComment(char* line, int lineLen) {
 		}
 	}
 	return false;
+}
+
+void Comments::removeEmptyLines(TextManager& text) {
+	char** source = text.getFileLines();
+	int numLines = text.getNumberLines();
+
+	for (int i = 0; i < numLines; i++) {
+		if (source[i][0] == '\r' && source[i][1] == '\n') {
+			//removeLine(text, i);
+		}
+		else if (source[i][1] == '\n') {
+			//removeLine(text, i);
+		}
+	}
 }

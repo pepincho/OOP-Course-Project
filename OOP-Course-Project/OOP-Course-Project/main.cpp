@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
 	std::cout << "------------------------------------------" << std::endl;
 
 	//char* currFileName = "test.txt";
-	char* currFileName = "test_multi_line_comments.txt";
+	char* currFileName = "test_multi_line_comments_3.txt";
 
 	TextManager fileSource(currFileName);
 	char** source = fileSource.getFileLines();
