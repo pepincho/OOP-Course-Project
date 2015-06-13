@@ -84,6 +84,8 @@ void ConsoleInput::distinguishConsoleInput(int argc, char* argv[]) {
 			indexFiles++;
 		}
 	}
+
+	reOrderHtmlCommand();
 }
 
 //
@@ -113,4 +115,40 @@ char** ConsoleInput::getPathsToFiles() const {
 
 char** ConsoleInput::getCommands() const {
 	return this->commands;
+}
+
+//
+// function that reorder commands
+// makes html command to be at the end of the commands array
+// in order to be met the requirements
+//
+void ConsoleInput::reOrderHtmlCommand() {
+	int indexHtmlCommand = 0;
+	bool isHtmlCommandInCommands = false;
+
+	for (int i = 0; i < this->numberCommands; i++) {
+		if (strcmp(this->commands[i], "html") == 0) {
+			indexHtmlCommand = i;
+			isHtmlCommandInCommands = true;
+			break;
+		}
+	}
+
+	if (isHtmlCommandInCommands) {
+		size_t buffSize = strlen(this->commands[this->numberCommands - 1]) + 1;
+		char* temp = new (std::nothrow) char[buffSize];
+		strcpy_s(temp, buffSize, this->commands[this->numberCommands - 1]);
+
+		delete[] this->commands[this->numberCommands - 1];
+
+		size_t newBuffSize = strlen(this->commands[indexHtmlCommand]) + 1;
+		this->commands[this->numberCommands - 1] = new (std::nothrow) char[newBuffSize];
+		strcpy_s(this->commands[this->numberCommands - 1], newBuffSize, this->commands[indexHtmlCommand]);
+
+		delete[] this->commands[indexHtmlCommand];
+
+		//size_t newBuffSize = strlen(commands[indexHtmlCommand]) + 1;
+		this->commands[indexHtmlCommand] = new (std::nothrow) char[buffSize];
+		strcpy_s(this->commands[indexHtmlCommand], buffSize, temp);
+	}
 }

@@ -23,6 +23,8 @@ private:
 	void clearPathsToFiles();
 	void clearCommands();
 private:
+	void reOrderHtmlCommand();
+private:
 	int numberFiles;
 	char** pathsToFiles;
 
