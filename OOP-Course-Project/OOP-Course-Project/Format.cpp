@@ -21,11 +21,13 @@ void Format::formatText(TextManager& text) {
 	int numLines = text.getNumberLines();
 	int currLineLen = 0;
 
+	//int counterIndentation = 0;
+
 	for (int i = 0; i < text.getNumberLines(); i++) 
 	{
 		currLineLen = strlen(text.getFileLines()[i]);
-		
 		int counterIndentation = 0;
+
 
 		if (hasEndLine(text.getFileLines()[i], currLineLen)) 
 		{
@@ -60,14 +62,77 @@ void Format::formatText(TextManager& text) {
 			text.setLine(newLine, i);
 			continue;
 		}
-		//else if (hasOpeningBracket(text.getFileLines()[i], currLineLen) || hasClosingBracket(text.getFileLines()[i], currLineLen)) 
-		//{
-		//	std::cout << "here, on line: " << i << std::endl;
-		//		
-		//	
 
-		//}
+		if (hasOpeningBracket(text.getFileLines()[i], currLineLen))
+		{
+			counterIndentation++;
 
+			int startLine = 0;
+			int endLine = findOpeningBracket(text.getFileLines()[i], strlen(text.getFileLines()[i]));
+		
+			int newLineSize = endLine + 2 + 1;
+			char* newLine = new (std::nothrow)char[newLineSize + 1];
+			if (newLine == NULL)
+				return;
+		
+			makeNewLine(text.getFileLines()[i], strlen(text.getFileLines()[i]), startLine, endLine, newLine);
+		
+			newLine[newLineSize - 2] = '\r';
+			newLine[newLineSize - 1] = '\n';
+			newLine[newLineSize] = '\0';
+
+
+			int startLine_2 = endLine + 1;
+			int endLine_2 = currLineLen - 1;
+
+			int sizeOtherLine = currLineLen - newLineSize + 2 + counterIndentation;
+			char* otherPartLine = new (std::nothrow)char[sizeOtherLine + 1];
+			if (otherPartLine == NULL)
+				return;
+
+			makeNewLine(text.getFileLines()[i], strlen(text.getFileLines()[i]), startLine_2, endLine_2, otherPartLine, counterIndentation);
+			otherPartLine[sizeOtherLine] = '\0';
+
+			text.insertLine(otherPartLine, i + 1);
+			text.setLine(newLine, i);
+			continue;
+		}
+
+
+		if (hasClosingBracket(text.getFileLines()[i], currLineLen))
+		{
+			counterIndentation--;
+
+			int startLine = 0;
+			int endLine = findClosingBracket(text.getFileLines()[i], strlen(text.getFileLines()[i]));
+
+			int newLineSize = endLine + 2 + 1;
+			char* newLine = new (std::nothrow)char[newLineSize + 1];
+			if (newLine == NULL)
+				return;
+
+			makeNewLine(text.getFileLines()[i], strlen(text.getFileLines()[i]), startLine, endLine, newLine);
+
+			newLine[newLineSize - 2] = '\r';
+			newLine[newLineSize - 1] = '\n';
+			newLine[newLineSize] = '\0';
+			
+
+			int startLine_2 = endLine + 1;
+			int endLine_2 = currLineLen - 1;
+
+			int sizeOtherLine = currLineLen - newLineSize + 2 + counterIndentation;
+			char* otherPartLine = new (std::nothrow)char[sizeOtherLine + 1];
+			if (otherPartLine == NULL)
+				return;
+
+			makeNewLine(text.getFileLines()[i], strlen(text.getFileLines()[i]), startLine_2, endLine_2, otherPartLine, counterIndentation);
+			otherPartLine[sizeOtherLine] = '\0';
+
+			text.insertLine(otherPartLine, i + 1);
+			text.setLine(newLine, i);
+			continue;
+		}
 
 	}
 }
@@ -81,8 +146,17 @@ int Format::findEndLine(char* line, int currLineLen) {
 }
 
 bool Format::hasEndLine(char* line, int currLineLen) {
+	bool isInForLoop = false;
 	for (int i = 0; i < currLineLen; i++) {
-		if (line[i] == ';') {
+		if (line[i] == 'f' && line[i + 1] == 'o' && line[i + 2] == 'r') {
+			isInForLoop = true;
+			continue;
+		}
+		if (isInForLoop == true && line[i] == ')') {
+			isInForLoop = false;
+			continue;
+		}
+		if (isInForLoop == false && line[i] == ';') {
 			return true;
 		}
 	}
@@ -107,6 +181,7 @@ void Format::makeNewLine(char* line, int currLineLen, int startLine, int endLine
 	}
 	
 	indx = counterIndentation;
+
 	for (int j = startLine; j < endLine; j++) {
 		newLine[indx] = line[j];
 		indx++;

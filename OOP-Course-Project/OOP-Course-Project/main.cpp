@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
 	std::cout << "------------------------------------------" << std::endl;
 
 	//char* currFileName = "test.txt";
-	char* currFileName = "test_new_lines_style_0.cpp";
+	char* currFileName = "test_format_2.cpp";
 
 	TextManager fileSource(currFileName);
 	char** source = fileSource.getFileLines();
