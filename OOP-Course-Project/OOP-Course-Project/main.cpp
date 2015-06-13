@@ -22,40 +22,40 @@ int main(int argc, char* argv[]) {
 	//	std::cout << "command[" << i << "] is " << nameCommands[i] << std::endl;
 	//}
 
-	std::cout << "------------------------------------------" << std::endl;
+	//std::cout << "------------------------------------------" << std::endl;
 
-	//char* currFileName = "test.txt";
-	char* currFileName = "test_format_2.cpp";
+	////char* currFileName = "test.txt";
+	//char* currFileName = "test_format_2.cpp";
 
-	TextManager fileSource(currFileName);
-	char** source = fileSource.getFileLines();
-	int counterLines = fileSource.getNumberLines();
-	int sizeSource = 0;
-	std::cout << "The file has " << fileSource.getNumberLines() << " lines." << std::endl;
-	for (int i = 0; i < counterLines; i++) {
-		std::cout << "<>line[" << i << "] -> " << source[i] << " len: " << strlen(source[i]) << std::endl;
-		sizeSource += strlen(source[i]);
-	}
-	std::cout << "Size of the file before commands: " << sizeSource << std::endl;
+	//TextManager fileSource(currFileName);
+	//char** source = fileSource.getFileLines();
+	//int counterLines = fileSource.getNumberLines();
+	//int sizeSource = 0;
+	//std::cout << "The file has " << fileSource.getNumberLines() << " lines." << std::endl;
+	//for (int i = 0; i < counterLines; i++) {
+	//	std::cout << "<>line[" << i << "] -> " << source[i] << " len: " << strlen(source[i]) << std::endl;
+	//	sizeSource += strlen(source[i]);
+	//}
+	//std::cout << "Size of the file before commands: " << sizeSource << std::endl;
 
-	std::cout << "------------------------------------------" << std::endl;
+	//std::cout << "------------------------------------------" << std::endl;
 	
 	try {
 		CommandFactory commandFac(cmdInput.getCommands(), cmdInput.getNumberCommands());
 		int numberCommands = commandFac.getNumberCommands();
 	
-		for (int i = 0; i < numberCommands; i++) {
-			commandFac.getCommands()[i]->processCommand(fileSource);
-		}
-		//int numberFiles = cmdInput.getNumberFiles();
-		//for (int i = 0; i < numberFiles; i++) {
-		//	TextManager fileSource(cmdInput.getPathsToFiles()[i]);
-
-		//	for (int j = 0; j < numberCommands; j++) {
-		//		commandFac.getCommands()[j]->processCommand(fileSource);
-		//	}
-		//	fileSource.writeToFile(cmdInput.getPathsToFiles()[i]);
+		//for (int i = 0; i < numberCommands; i++) {
+		//	commandFac.getCommands()[i]->processCommand(fileSource);
 		//}
+		int numberFiles = cmdInput.getNumberFiles();
+		for (int i = 0; i < numberFiles; i++) {
+			TextManager fileSource(cmdInput.getPathsToFiles()[i]);
+
+			for (int j = 0; j < numberCommands; j++) {
+				commandFac.getCommands()[j]->processCommand(fileSource);
+			}
+			fileSource.writeToFile(cmdInput.getPathsToFiles()[i]);
+		}
 	
 	}
 	catch (std::exception& e) {
@@ -72,19 +72,19 @@ int main(int argc, char* argv[]) {
 	//
 	//
 
-	std::cout << "------------------------------------------" << std::endl;
+	//std::cout << "------------------------------------------" << std::endl;
 
-	char** newSource = fileSource.getFileLines();
-	int counterNewLines = fileSource.getNumberLines();
-	int sizeNewSource = 0;
-	std::cout << "The file has " << fileSource.getNumberLines() << " lines." << std::endl;
-	for (int i = 0; i < counterNewLines; i++) {
-		std::cout << "<>line[" << i << "] -> " << newSource[i] << " len: " << strlen(newSource[i]) << std::endl;
-		sizeNewSource += strlen(newSource[i]);
-	}
-	std::cout << "Size of the file after commands: " << sizeNewSource << std::endl;
+	//char** newSource = fileSource.getFileLines();
+	//int counterNewLines = fileSource.getNumberLines();
+	//int sizeNewSource = 0;
+	//std::cout << "The file has " << fileSource.getNumberLines() << " lines." << std::endl;
+	//for (int i = 0; i < counterNewLines; i++) {
+	//	std::cout << "<>line[" << i << "] -> " << newSource[i] << " len: " << strlen(newSource[i]) << std::endl;
+	//	sizeNewSource += strlen(newSource[i]);
+	//}
+	//std::cout << "Size of the file after commands: " << sizeNewSource << std::endl;
 
-	std::cout << "------------------------------------------" << std::endl;
+	//std::cout << "------------------------------------------" << std::endl;
 
 	return 0;
 }

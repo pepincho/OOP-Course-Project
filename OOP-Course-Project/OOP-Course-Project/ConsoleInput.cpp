@@ -151,4 +151,5 @@ void ConsoleInput::reOrderHtmlCommand() {
 		this->commands[indexHtmlCommand] = new (std::nothrow) char[buffSize];
 		strcpy_s(this->commands[indexHtmlCommand], buffSize, temp);
 	}
+
 }

@@ -101,7 +101,7 @@ void Html::generateHtmlFile(TextManager& text) {
 					myTextFile.write((const char*)pch, strlen(pch));
 					myTextFile.write((const char*)"</span>", strlen("</span>"));
 				}
-				else if (strcmp(pch, "for") == 0 || strcmp(pch, "while") == 0) {
+				else if (strcmp(pch, "for") == 0 || strcmp(pch, "while") == 0 || strcmp(pch, "return") == 0) {
 					myTextFile.write((const char*)"&nbsp", strlen("&nbsp"));
 
 					myTextFile.write((const char*)"<span id=\"res_word\" \">", strlen("<span id=\"res_word\" \">"));
