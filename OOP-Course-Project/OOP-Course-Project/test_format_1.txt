@@ -1,3 +1,0 @@
-int x; int b;int x;
-if (3>4){
-if(5>2){ } }
