@@ -18,6 +18,9 @@ ConsoleInput::~ConsoleInput() {
 	//std::cout << "ConsoleInput::~ConsoleInput()" << std::endl;
 }
 
+//
+// function that delete the allocated memory
+//
 void ConsoleInput::clearPathsToFiles() {
 	for (int i = 0; i < this->numberFiles; i++) {
 		delete[] this->pathsToFiles[i];
@@ -27,6 +30,9 @@ void ConsoleInput::clearPathsToFiles() {
 	this->numberFiles = 0;
 }
 
+//
+// function that delete the allocated memory
+//
 void ConsoleInput::clearCommands() {
 	for (int i = 0; i < this->numberCommands; i++) {
 		delete[] this->commands[i];
@@ -36,6 +42,11 @@ void ConsoleInput::clearCommands() {
 	this->numberCommands = 0;
 }
 
+//
+// function that disgtinguish commands from files
+// save the commands in char** commands array
+// save the file and their paths in char** pathsToFiles array
+//
 void ConsoleInput::distinguishConsoleInput(int argc, char* argv[]) {
 	int counterCommands = 0;
 	int counterFiles = 0;
@@ -75,6 +86,9 @@ void ConsoleInput::distinguishConsoleInput(int argc, char* argv[]) {
 	}
 }
 
+//
+// function that checks is the given argument is a command
+//
 bool ConsoleInput::isCommand(char* item) {
 	assert(item != NULL);
 

@@ -20,29 +20,34 @@ void NewLines::processCommand(TextManager& text) {
 	changeStyle(text);
 }
 
+//
+// function that changes the style in the given .cpp file
+// it takes a TextManager instance of the .cpp file
+//
 void NewLines::changeStyle(TextManager& text) {
 	char** source = (char**)text.getFileLines();
 	int numberLines = text.getNumberLines();
-	//std::cout << "style: " << this->newLinesStyle << std::endl;
+
 	for (int i = 0; i < numberLines; i++) {
 		int currLineLen = strlen(source[i]);
-		//
-		// 
-		//
+		
+		// check which is the preferable style (CRLF)
 		if (this->newLinesStyle == 0) {
 			for (int j = 0; j < currLineLen - 1; j++) {
+
 				if (source[i][j] == '\r' && source[i][j + 1] == '\n') {
 					continue;
 				}
-				//else {
+
 				else if ((source[i][j] != '\r' && source[i][j + 1] == '\n')) {
-					//std::cout << "tuke sme" << std::endl;
 					char* newLine = new (std::nothrow) char[currLineLen + 1 + 1];
 					if (newLine == NULL)
 						return;
+
 					for (int k = 0; k < currLineLen - 1; k++) {
 						newLine[k] = source[i][k];
 					}
+
 					newLine[currLineLen - 1] = '\r';
 					newLine[currLineLen] = '\n';
 					newLine[currLineLen + 1] = '\0';
@@ -62,27 +67,25 @@ void NewLines::changeStyle(TextManager& text) {
 				text.setLine(newLine, i);
 			}
 		}
+
+		// if the preferable style is the other one (LF)
+		// we come here
 		else {
-			//std::cout << "tak Size len: " << currLineLen << std::endl;
 			for (int j = 0; j < currLineLen - 1; j++) {
 				if (source[i][j] != '\r' && source[i][j + 1] == '\n') {
-					//std::cout << "tuka li sum " << std::endl;
-
 					continue;
 				}
-				//else {
 				else if (source[i][j] == '\r' && source[i][j + 1] == '\n') {
-					//std::cout << "epa tuk sum " << std::endl;
-
 					char* newLine = new (std::nothrow) char[currLineLen - 1 + 1];
 					if (newLine == NULL)
 						return;
+
 					for (int k = 0; k < currLineLen - 1 - 1; k++) {
 						newLine[k] = source[i][k];
 					}
+
 					newLine[currLineLen - 1 - 1] = '\n';
 					newLine[currLineLen - 1] = '\0';
-					//std::cout << "Size len: " << strlen(newLine) << std::endl;
 					text.setLine(newLine, i);
 				}
 			}

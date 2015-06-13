@@ -3,6 +3,10 @@
 #include "Command.h"
 #include "TextManager.h"
 
+//
+// newlines class that represent a newlines command
+// inherit the base abstract command class
+//
 class NewLines : public Command {
 public:
 	NewLines();

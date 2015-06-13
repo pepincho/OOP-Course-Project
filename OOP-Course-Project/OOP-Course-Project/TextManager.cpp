@@ -26,6 +26,10 @@ void TextManager::clearSourceLines() {
 	this->numberLines = 0;
 }
 
+//
+// function that read the .cpp file content
+// stores it in the sourceLines char** array
+//
 void TextManager::readToFile(char* fileName) {
 	int fileSize = getFileSize(fileName);
 
@@ -78,6 +82,9 @@ void TextManager::readToFile(char* fileName) {
 	myFile.close();
 }
 
+//
+// function that returns the file size
+//
 int TextManager::getFileSize(char* fileName) {
 	std::ifstream myFile(fileName, std::ios::binary | std::ios::ate);
 
@@ -89,6 +96,9 @@ int TextManager::getFileSize(char* fileName) {
 	return int(myFile.tellg());
 }
 
+//
+// function that returns the number of lines in the sourceLines char** array
+//
 int TextManager::getFileNumberLines(char* fileName) {
 	std::ifstream myFile(fileName, std::ios::binary);
 
@@ -112,6 +122,9 @@ int TextManager::getFileNumberLines(char* fileName) {
 	return counterLines;
 }
 
+//
+// function that insert a given line in the sourceLines char** array
+//
 void TextManager::insertLine(char* line, int atRow) {
 	int newNumLines = this->numberLines + 1;
 	char** temp = new (std::nothrow) char*[newNumLines];
@@ -120,7 +133,6 @@ void TextManager::insertLine(char* line, int atRow) {
 	int indx = 0;
 
 	for (int i = 0; i < atRow; i++) {
-		//temp[i] = this->sourceLines[i];
 		size_t buffSize = strlen(this->sourceLines[i]) + 1;
 		temp[i] = new (std::nothrow) char[buffSize];
 		if (temp[i] == NULL)
@@ -136,10 +148,8 @@ void TextManager::insertLine(char* line, int atRow) {
 		return;
 
 	strcpy_s(temp[atRow], lineLen, line);
-	//std::cout << "indx: " << indx << std::endl;
-	//std::cout << "atRow: " << atRow << std::endl;
+
 	for (int i = indx; i < this->numberLines; i++) {
-		//temp[i + 1] = this->sourceLines[i];
 		size_t buffSize = strlen(this->sourceLines[i]) + 1;
 		temp[i + 1] = new (std::nothrow) char[buffSize];
 		if (temp[i + 1] == NULL)
@@ -155,7 +165,6 @@ void TextManager::insertLine(char* line, int atRow) {
 
 	for (int i = 0; i < this->numberLines; i++) {
 		size_t buffSize = strlen(temp[i]) + 1;
-		//this->sourceLines[i] = temp[i];
 		this->sourceLines[i] = new (std::nothrow) char[buffSize];
 		if (this->sourceLines[i] == NULL)
 			return;
@@ -165,27 +174,26 @@ void TextManager::insertLine(char* line, int atRow) {
 	delete[] temp;
 }
 
+//
+// function that returns a line on a given index
+//
 char* TextManager::getLine(size_t atRow) const {
 	return this->sourceLines[atRow];
 }
 
+//
+// function that makes changes on a line on a given index
+// it takes a new line and save it on the given index in sourceLines char** array
+//
 void TextManager::setLine(char* newLine, int atRow) {
 	this->sourceLines[atRow] = new (std::nothrow) char[strlen(newLine) + 1];
 	strcpy_s(this->sourceLines[atRow], strlen(newLine) + 1, newLine);
 }
 
+//
+// function that "remove" the content on a given index
+//
 void TextManager::removeLine(int atRow) {
-	//int newNumLines = this->numberLines - 1;
-
-	//for (int i = atRow; i < this->numberLines - 1; i++) {
-	//	size_t currLen = strlen(this->sourceLines[i + 1]) + 1;
-	//	strcpy_s(this->sourceLines[i], currLen, this->sourceLines[i + 1]);
-	//}
-	//delete[] sourceLines[this->numberLines - 1];
-	//this->numberLines = newNumLines;
-
-	//this->sourceLines[atRow] == NULL;
-
 	delete[] sourceLines[atRow];
 	sourceLines[atRow] = new (std::nothrow) char[2 + 1];
 	sourceLines[atRow][0] = '\r';
@@ -193,8 +201,11 @@ void TextManager::removeLine(int atRow) {
 	sourceLines[atRow][2] = '\0';
 }
 
+//
+// function that remove the line on given index from sourceLines char** array
+// also decrement the number of lines
+//
 void TextManager::removeLineTEST(int atRow) {
-
 	int newNumLines = this->numberLines - 1;
 	char** temp = new (std::nothrow) char*[newNumLines];
 	if (temp == NULL)
@@ -202,7 +213,6 @@ void TextManager::removeLineTEST(int atRow) {
 	int indx = 0;
 
 	for (int i = 0; i < atRow; i++) {
-		//temp[i] = this->sourceLines[i];
 		size_t buffSize = strlen(this->sourceLines[i]) + 1;
 		temp[i] = new (std::nothrow) char[buffSize];
 		if (temp[i] == NULL)
@@ -212,15 +222,7 @@ void TextManager::removeLineTEST(int atRow) {
 	}
 	indx++;
 
-	//size_t lineLen = strlen(line) + 1;
-	//temp[atRow] = new (std::nothrow) char[lineLen];
-	//if (temp[atRow] == NULL)
-	//	return;
-
-	//strcpy_s(temp[atRow], lineLen, line);
-
 	for (int i = indx; i < newNumLines; i++) {
-		//temp[i + 1] = this->sourceLines[i];
 		size_t buffSize = strlen(this->sourceLines[i + 1]) + 1;
 		temp[i] = new (std::nothrow) char[buffSize];
 		if (temp[i] == NULL)
@@ -236,7 +238,6 @@ void TextManager::removeLineTEST(int atRow) {
 
 	for (int i = 0; i < this->numberLines; i++) {
 		size_t buffSize = strlen(temp[i]) + 1;
-		//this->sourceLines[i] = temp[i];
 		this->sourceLines[i] = new (std::nothrow) char[buffSize];
 		if (this->sourceLines[i] == NULL)
 			return;
@@ -246,12 +247,17 @@ void TextManager::removeLineTEST(int atRow) {
 	delete[] temp;
 }
 
+//
+// function that save the sourceLines char** array in a given file names
+// the original file is save as .odd
+// the content after commands is save as the original file name
+//
 void TextManager::writeToFile(char* &currFileName) {
 	size_t newLenNameFile = strlen(currFileName) + 1;
 	char* newName = new char[newLenNameFile];
 	strcpy_s(newName, newLenNameFile, currFileName);
 	char* toOldName = ".old";
-	char newText[50];
+	char newText[_MAX_PATH];
 
 	strcpy(newText, currFileName);
 	strcat(newText, toOldName);

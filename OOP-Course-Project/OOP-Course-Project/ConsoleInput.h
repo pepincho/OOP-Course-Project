@@ -1,10 +1,14 @@
 #pragma once
 
+//
+// class that take care of the console input arguments
+//
 class ConsoleInput {
 public:
 	ConsoleInput();
 	~ConsoleInput();
 public:
+	// function that distinguish commands from the files
 	void distinguishConsoleInput(int argc, char* argv[]);
 public:
 	int getNumberFiles() const;
@@ -21,6 +25,7 @@ private:
 private:
 	int numberFiles;
 	char** pathsToFiles;
+
 	int numberCommands;
 	char** commands;
 };

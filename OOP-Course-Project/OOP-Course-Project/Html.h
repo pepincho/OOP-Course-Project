@@ -3,6 +3,10 @@
 #include "Command.h"
 #include "TextManager.h"
 
+//
+// html class that represent a html command
+// inherit the base abstract command class
+//
 class Html : public Command {
 public:
 	Html();

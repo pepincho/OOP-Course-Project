@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
 	std::cout << "------------------------------------------" << std::endl;
 
 	//char* currFileName = "test.txt";
-	char* currFileName = "test_format_1.txt";
+	char* currFileName = "test_multi_line_comments_3.txt";
 
 	TextManager fileSource(currFileName);
 	char** source = fileSource.getFileLines();
@@ -47,23 +47,23 @@ int main(int argc, char* argv[]) {
 		for (int i = 0; i < numberCommands; i++) {
 			commandFac.getCommands()[i]->processCommand(fileSource);
 		}
+		//int numberFiles = cmdInput.getNumberFiles();
+		//for (int i = 0; i < numberFiles; i++) {
+		//	TextManager fileSource(cmdInput.getPathsToFiles()[i]);
+
+		//	for (int j = 0; j < numberCommands; j++) {
+		//		commandFac.getCommands()[j]->processCommand(fileSource);
+		//	}
+		//	fileSource.writeToFile(cmdInput.getPathsToFiles()[i]);
+		//}
+	
 	}
 	catch (std::exception& e) {
 		std::cerr << "ERROR: Operation failed! Reason: " << e.what() << std::endl;
 		std::exit(0);
 	}
 
-	//
-	//int numberFiles = cmdInput.getNumberFiles();
-	//for (int i = 0; i < numberFiles; i++) {
-	//	TextManager fileSource(cmdInput.getPathsToFiles()[i]);
-
-	//	for (int j = 0; j < numberCommands; j++) {
-	//		commandFac.getCommands()[j]->processCommand(fileSource);
-	//	}
-	//	fileSource.writeToFile(cmdInput.getPathsToFiles()[i]);
-	//}
-	//
+	
 
 
 	//
@@ -72,7 +72,7 @@ int main(int argc, char* argv[]) {
 	//
 	//
 
-	//std::cout << "------------------------------------------" << std::endl;
+	std::cout << "------------------------------------------" << std::endl;
 
 	char** newSource = fileSource.getFileLines();
 	int counterNewLines = fileSource.getNumberLines();

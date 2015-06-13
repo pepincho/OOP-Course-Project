@@ -31,7 +31,5 @@ private:
 
 	bool hasMultiLineComment(char*, int);
 
-	// some bad functions, but it works for more of the cases
 	void removeEmptyLines(TextManager& text);
-	//void removeLine(TextManager& text, int);
 };

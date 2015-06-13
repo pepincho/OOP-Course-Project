@@ -3,6 +3,10 @@
 #include "Command.h"
 #include "TextManager.h"
 
+//
+// indentation class that represent a indentation command
+// inherit the base abstract command class
+//
 class Indentation : public Command {
 public:
 	Indentation();

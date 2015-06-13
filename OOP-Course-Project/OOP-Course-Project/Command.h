@@ -2,6 +2,9 @@
 
 #include "TextManager.h"
 
+//
+// base abstract class that represent a command
+//
 class Command {
 public:
 	Command();

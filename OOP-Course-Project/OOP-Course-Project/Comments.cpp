@@ -18,6 +18,10 @@ void Comments::processCommand(TextManager& text) {
 	removeEmptyLines(text);
 }
 
+//
+// function that removes single-line comments from the text in the cpp file
+// it takes a TextManager instance and works on the source
+//
 void Comments::removeComment(TextManager& text) {
 	char** source = text.getFileLines();
 	int numLines = text.getNumberLines();
@@ -42,6 +46,9 @@ void Comments::removeComment(TextManager& text) {
 	}
 }
 
+//
+// function that checks is there a comment
+//
 bool Comments::hasComment(char* line, int lineLen) {
 	for (int i = 0; i < lineLen - 1; i++) {
 		if (line[i] == '/' && line[i + 1] == '/') {
@@ -51,6 +58,10 @@ bool Comments::hasComment(char* line, int lineLen) {
 	return false;
 }
 
+//
+// function that find the start column position of a comment on a given line
+// it returns the start index of the comment in the given line
+//
 int Comments::findStartComment(char* line, int lineLen) {
 	for (int i = 0; i < lineLen - 1; i++) {
 		if (line[i] == '/' && line[i + 1] == '/') {
@@ -59,6 +70,10 @@ int Comments::findStartComment(char* line, int lineLen) {
 	}
 }
 
+//
+// function that find the last position of a comment on a given line
+// it returns the last index of the comment in the given line
+//
 int Comments::findEndComment(char* line, int lineLen) {
 	for (int i = 0; i < lineLen - 1; i++) {
 		if ((line[i] == '\r' && line[i + 1] == '\n')) {
@@ -70,6 +85,9 @@ int Comments::findEndComment(char* line, int lineLen) {
 	}
 }
 
+//
+// function that makes a new line from a given source line
+//
 void Comments::makeNewLine(char* line, int currLineLen, int startComment, int endComment, char* newLine) {
 	bool isInComm = false;
 	int indx = 0;
@@ -91,21 +109,18 @@ void Comments::makeNewLine(char* line, int currLineLen, int startComment, int en
 	}
 }
 
+//
+// function that removes multi-line comments from the text in the cpp file
+// it takes a TextManager instance and works on the source
+//
 void Comments::removeMultiLineComment(TextManager& text) {
-	//std::cout << "In removeMultiLineComments" << std::endl;
 	char** source = text.getFileLines();
 	int numLines = text.getNumberLines();
+
 	bool isInComment = false;
-
 	int currIndex = 0;
+
 	for (int i = 0; i < numLines; i++) {
-	//while (currIndex < numLines) {
-		//std::cout << "on line: " << source[i] << std::endl;
-		
-		//if (source[currIndex] != NULL) {
-
-		//std::cout << "currIndex: " << currIndex << std::endl;
-
 		int currLineLen = strlen(source[currIndex]);
 
 		if (hasOpeningComment(source[currIndex], strlen(source[currIndex])) == true) {
@@ -122,18 +137,13 @@ void Comments::removeMultiLineComment(TextManager& text) {
 			int endColumnComment = findEndMultiLineComment(source[currIndex], currLineLen);
 
 			int sizeCurrNewLine = currLineLen - (endColumnComment - startColumnComment);
-
 			char* currNewLine = new (std::nothrow) char[sizeCurrNewLine + 1];
 			if (currNewLine == NULL)
 				return;
 
-			//std::cout << "endColumnComment: " << source[currIndex][endColumnComment] << std::endl;
 			makeNewLine(source[currIndex], currLineLen, startColumnComment, endColumnComment, currNewLine);
-			//std::cout << "newLine: " << currNewLine << std::endl;
 			currNewLine[sizeCurrNewLine] = '\0';
 			text.setLine(currNewLine, currIndex);
-
-
 
 			currIndex++;
 			continue;
@@ -147,9 +157,8 @@ void Comments::removeMultiLineComment(TextManager& text) {
 			char* currNewLine = new (std::nothrow) char[sizeCurrNewLine + 1];
 			if (currNewLine == NULL)
 				return;
-			//std::cout << "endColumnComment: " << source[currIndex][endColumnComment + 1] << std::endl;
-			makeNewLine(source[currIndex], currLineLen, 0, endColumnComment + 1, currNewLine);
 
+			makeNewLine(source[currIndex], currLineLen, 0, endColumnComment + 1, currNewLine);
 			currNewLine[sizeCurrNewLine] = '\0';
 			text.setLine(currNewLine, currIndex);
 
@@ -158,25 +167,22 @@ void Comments::removeMultiLineComment(TextManager& text) {
 			continue;
 		}
 		else if (isInComment == true) {
-			//std::cout << "currIndex: " << currIndex << std::endl;
 			text.removeLine(currIndex);
 			currIndex++;
 			continue;
-			//
-			//currIndex++;
-			//continue;
 		}
 		else {
 			currIndex++;
 			continue;
 		}
 		currIndex++;
-		//}
-
-	//}
 	}
 }
 
+//
+// function that find the start column position of a multi-line comment on a given line
+// it returns the start index of the comment in the given line
+//
 int Comments::findStartMultiLineComment(char* line, int lineLen) {
 	for (int i = 0; i < lineLen - 1; i++) {
 		if (line[i] == '/' && line[i + 1] == '*') {
@@ -185,6 +191,10 @@ int Comments::findStartMultiLineComment(char* line, int lineLen) {
 	}
 }
 
+//
+// function that find the last position of a multi-line comment on a given line
+// it returns the last index of the comment in the given line
+//
 int Comments::findEndMultiLineComment(char* line, int lineLen) {
 	for (int i = 0; i < lineLen - 1; i++) {
 		if (line[i] == '*' && line[i + 1] == '/') {
@@ -207,6 +217,9 @@ int Comments::findEndMultiLineComment(char* line, int lineLen) {
 	}
 }
 
+//
+// function that checks is there a start of a multi-line comment
+//
 bool Comments::hasMultiLineComment(char* line, int lineLen) {
 	for (int i = 0; i < lineLen - 1; i++) {
 		if (line[i] == '/' && line[i + 1] == '*') {
@@ -216,6 +229,9 @@ bool Comments::hasMultiLineComment(char* line, int lineLen) {
 	return false;
 }
 
+//
+// function that checks are there symbols that open the multi-line comment
+//
 bool Comments::hasOpeningComment(char* line, int lineLen) {
 	for (int i = 0; i < lineLen - 1; i++) {
 		if (line[i] == '/' && line[i + 1] == '*') {
@@ -225,6 +241,9 @@ bool Comments::hasOpeningComment(char* line, int lineLen) {
 	return false;
 }
 
+//
+// function that checks are there symbols that close the multi-line comment
+//
 bool Comments::hasClosingComment(char* line, int lineLen) {
 	for (int i = 0; i < lineLen - 1; i++) {
 		if (line[i] == '*' && line[i + 1] == '/') {
@@ -234,18 +253,19 @@ bool Comments::hasClosingComment(char* line, int lineLen) {
 	return false;
 }
 
+//
+// function that removes empty lines from the source
+//
 void Comments::removeEmptyLines(TextManager& text) {
 	char** source = text.getFileLines();
 	int numLines = text.getNumberLines();
 
 	for (int i = 0; i < text.getNumberLines(); i++) {
 		if (text.getFileLines()[i][0] == '\r' && text.getFileLines()[i][1] == '\n') {
-			//removeLine(text, i);
 			text.removeLineTEST(i);
 			i--;
 		}
 		else if (text.getFileLines()[i][0] == '\n') {
-			//removeLine(text, i);
 			text.removeLineTEST(i);
 			i--;
 		}

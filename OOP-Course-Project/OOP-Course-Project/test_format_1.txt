@@ -1,7 +1,3 @@
 int x; int b;int x;
-if (3>4) { if (5>2) { } }
-int abv;
-dsadas;
-for (int i=0; i < 5; i++) {
-}
-ho hopdsada; ddam;
+if (3>4){
+if(5>2){ } }

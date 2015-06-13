@@ -12,6 +12,9 @@ CommandFactory::~CommandFactory() {
 	clearCommands();
 }
 
+//
+// function that delete all command objects
+//
 void CommandFactory::clearCommands() {
 	for (int i = 0; i < this->numberCommands; i++) {
 		delete[] this->commands[i];
@@ -29,6 +32,10 @@ CommandFactory::CommandFactory(char** arrCommands, int sizeArrCommands) {
 	}
 }
 
+//
+// function that creates command objects
+// if there is a wrong command it throws an exceptions
+//
 void CommandFactory::createCommands(char* nameCommand, int indx) {
 	if (strcmp(nameCommand, "comments") == 0) {
 		this->commands[indx] = new Comments();

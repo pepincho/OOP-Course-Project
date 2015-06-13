@@ -21,63 +21,82 @@ void Indentation::processCommand(TextManager& text) {
 	changeStyle(text);
 }
 
+//
+// function that changes the style in the given .cpp file
+// it takes a TextManager instance of the .cpp file
+//
 void Indentation::changeStyle(TextManager& text) {
 	char** source = text.getFileLines();
 	int numberLines = text.getNumberLines();
-	//std::cout << "style: " << this->identationStyle << std::endl;
+
 	for (int i = 0; i < numberLines; i++) {
 		int currLineLen = strlen(source[i]);
-		//
-		//
+
+		// check which is the preferable style (tabs)
 		if (this->identationStyle == 0) {
 			for (int j = 0; j < currLineLen; j++) {
 				currLineLen = strlen(source[i]);
-				//std::cout << "<------>currLine: " << source[i] << std::endl;
+
+				// if the current symbol is '\t' we skip this step
 				if (source[i][j] == '\t') {
 					continue;
 				}
-				//else {
+
+				// check are the next four symbols spaces
+				// and we replace them with a '\t' symbol
 				else if (areNextFourSpaces(source[i], j) == true) {
 					int sizeNewLine = currLineLen - 1 - 1 - 1 + 1;
 					char* newLine = new (std::nothrow) char[sizeNewLine];
 					if (newLine == NULL)
 						return;
+
 					int currIndx = 0;
+
 					for (int k = currIndx; k < j; k++) {
 						newLine[currIndx] = source[i][k];
 						currIndx++;
 					}
-					int bam = currIndx;
+
+					int temp = currIndx;
+
 					for (int k = j + 3; k < currLineLen; k++) {
 						newLine[currIndx] = source[i][k];
 						currIndx++;
 					}
-					newLine[bam] = '\t';
+
+					newLine[temp] = '\t';
 					newLine[sizeNewLine - 1] = '\0';
 					text.setLine(newLine, i);
 				}
 			}
 		}
+		// if the preferable style is the other one (spaces)
+		// we come here
 		else {
 			for (int j = 0; j < currLineLen; j++) {
 				currLineLen = strlen(source[i]);
+
+				// if the next four symbols are spaces we skip this step
 				if (areNextFourSpaces(source[i], j) == true) {
-					//j += 3;
 					continue;
 				}
+
+				// check are the next symbol is '\t'
+				// and we replace it with four spaces
 				else if (source[i][j] == '\t') {
 					int sizeNewLine = currLineLen + 1 + 1 + 1 + 1;
 					char* newLine = new (std::nothrow) char[sizeNewLine];
 					if (newLine == NULL)
 						return;
+
 					int currIndx = 0;
+
 					for (int k = 0; k < j; k++) {
 						newLine[k] = source[i][k];
 						currIndx++;
 					}
-					//std::cout << "000 line-----> " << source[i][j + 1] << std::endl;
 
-					int bam = currIndx;
+					int temp = currIndx;
 					newLine[currIndx] = ' ';
 					currIndx++;
 					newLine[currIndx] = ' ';
@@ -86,23 +105,23 @@ void Indentation::changeStyle(TextManager& text) {
 					currIndx++;
 					newLine[currIndx] = ' ';
 					currIndx++;
-					//currIndx += 2;
-					//std::cout << "000 line" << source[i] << std::endl;
+
 					for (int k = j + 1; k < currLineLen; k++) {
-
 						newLine[currIndx] = source[i][k];
 						currIndx++;
 					}
 
 					newLine[sizeNewLine - 1] = '\0';
 					text.setLine(newLine, i);
-					//std::cout << "text line after ... " << std::endl;
 				}
 			}
 		}
 	}
 }
 
+//
+// function that checks are the next four symbols spaces
+//
 bool Indentation::areNextFourSpaces(char* line, int startPos) {
 	if (line[startPos] == ' ' && line[startPos + 1] == ' ' && line[startPos + 2] == ' ' && line[startPos + 3] == ' ') {
 		return true;

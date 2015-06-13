@@ -33,7 +33,7 @@ void Html::generateHtmlFile(TextManager& text) {
 	//std::cout << "The new name of the file is " << newName << std::endl;
 	//strcpy_s(newName, newLenNameFile, currFileName);
 	char* toNewHtmlName = ".html";
-	char newText[50];
+	char newText[_MAX_PATH];
 
 	strcpy(newText, newName);
 	strcat(newText, toNewHtmlName);
