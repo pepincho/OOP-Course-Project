@@ -120,7 +120,12 @@ void TextManager::insertLine(char* line, int atRow) {
 	int indx = 0;
 
 	for (int i = 0; i < atRow; i++) {
-		temp[i] = this->sourceLines[i];
+		//temp[i] = this->sourceLines[i];
+		size_t buffSize = strlen(this->sourceLines[i]) + 1;
+		temp[i] = new (std::nothrow) char[buffSize];
+		if (temp[i] == NULL)
+			return;
+		strcpy_s(temp[i], buffSize, this->sourceLines[i]);
 		indx = i;
 	}
 	indx++;
@@ -131,9 +136,15 @@ void TextManager::insertLine(char* line, int atRow) {
 		return;
 
 	strcpy_s(temp[atRow], lineLen, line);
-
+	//std::cout << "indx: " << indx << std::endl;
+	//std::cout << "atRow: " << atRow << std::endl;
 	for (int i = indx; i < this->numberLines; i++) {
-		temp[i + 1] = this->sourceLines[i];
+		//temp[i + 1] = this->sourceLines[i];
+		size_t buffSize = strlen(this->sourceLines[i]) + 1;
+		temp[i + 1] = new (std::nothrow) char[buffSize];
+		if (temp[i + 1] == NULL)
+			return;
+		strcpy_s(temp[i + 1], strlen(this->sourceLines[i]) + 1, this->sourceLines[i]);
 	}
 
 	this->numberLines = newNumLines;
@@ -144,7 +155,11 @@ void TextManager::insertLine(char* line, int atRow) {
 
 	for (int i = 0; i < this->numberLines; i++) {
 		size_t buffSize = strlen(temp[i]) + 1;
-		this->sourceLines[i] = temp[i];
+		//this->sourceLines[i] = temp[i];
+		this->sourceLines[i] = new (std::nothrow) char[buffSize];
+		if (this->sourceLines[i] == NULL)
+			return;
+		strcpy_s(sourceLines[i], strlen(temp[i]) + 1, temp[i]);
 	}
 
 	delete[] temp;
@@ -178,6 +193,59 @@ void TextManager::removeLine(int atRow) {
 	sourceLines[atRow][2] = '\0';
 }
 
+void TextManager::removeLineTEST(int atRow) {
+
+	int newNumLines = this->numberLines - 1;
+	char** temp = new (std::nothrow) char*[newNumLines];
+	if (temp == NULL)
+		return;
+	int indx = 0;
+
+	for (int i = 0; i < atRow; i++) {
+		//temp[i] = this->sourceLines[i];
+		size_t buffSize = strlen(this->sourceLines[i]) + 1;
+		temp[i] = new (std::nothrow) char[buffSize];
+		if (temp[i] == NULL)
+			return;
+		strcpy_s(temp[i], buffSize, this->sourceLines[i]);
+		indx = i;
+	}
+	indx++;
+
+	//size_t lineLen = strlen(line) + 1;
+	//temp[atRow] = new (std::nothrow) char[lineLen];
+	//if (temp[atRow] == NULL)
+	//	return;
+
+	//strcpy_s(temp[atRow], lineLen, line);
+
+	for (int i = indx; i < newNumLines; i++) {
+		//temp[i + 1] = this->sourceLines[i];
+		size_t buffSize = strlen(this->sourceLines[i + 1]) + 1;
+		temp[i] = new (std::nothrow) char[buffSize];
+		if (temp[i] == NULL)
+			return;
+		strcpy_s(temp[i], strlen(this->sourceLines[i + 1]) + 1, this->sourceLines[i + 1]);
+	}
+
+	this->numberLines = newNumLines;
+	this->sourceLines = new (std::nothrow) char*[this->numberLines];
+
+	if (this->sourceLines == NULL)
+		return;
+
+	for (int i = 0; i < this->numberLines; i++) {
+		size_t buffSize = strlen(temp[i]) + 1;
+		//this->sourceLines[i] = temp[i];
+		this->sourceLines[i] = new (std::nothrow) char[buffSize];
+		if (this->sourceLines[i] == NULL)
+			return;
+		strcpy_s(sourceLines[i], strlen(temp[i]) + 1, temp[i]);
+	}
+
+	delete[] temp;
+}
+
 void TextManager::writeToFile(char* &currFileName) {
 	size_t newLenNameFile = strlen(currFileName) + 1;
 	char* newName = new char[newLenNameFile];
@@ -204,7 +272,7 @@ void TextManager::writeToFile(char* &currFileName) {
 	myTextFile.close();
 }
 
-char** TextManager::getFileLines() const {
+char** TextManager::getFileLines() {
 	return this->sourceLines;
 }
 

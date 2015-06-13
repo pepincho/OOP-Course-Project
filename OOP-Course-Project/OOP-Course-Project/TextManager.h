@@ -13,8 +13,14 @@ public:
 	void setLine(char*, int);
 	char* getLine(size_t) const;
 	void insertLine(char*, int);
+
+	//alabala
+	void removeLineTEST(int);
+
 public:
-	char** getFileLines() const;
+	//char** getFileLines() const;
+
+	char** getFileLines();
 	int getNumberLines() const;
 
 	char* getFileName() const;

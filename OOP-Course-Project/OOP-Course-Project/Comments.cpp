@@ -238,12 +238,16 @@ void Comments::removeEmptyLines(TextManager& text) {
 	char** source = text.getFileLines();
 	int numLines = text.getNumberLines();
 
-	for (int i = 0; i < numLines; i++) {
-		if (source[i][0] == '\r' && source[i][1] == '\n') {
+	for (int i = 0; i < text.getNumberLines(); i++) {
+		if (text.getFileLines()[i][0] == '\r' && text.getFileLines()[i][1] == '\n') {
 			//removeLine(text, i);
+			text.removeLineTEST(i);
+			i--;
 		}
-		else if (source[i][1] == '\n') {
+		else if (text.getFileLines()[i][0] == '\n') {
 			//removeLine(text, i);
+			text.removeLineTEST(i);
+			i--;
 		}
 	}
 }

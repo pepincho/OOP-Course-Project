@@ -46,6 +46,12 @@ int main(int argc, char* argv[]) {
 	for (int i = 0; i < numberCommands; i++) {
 		commandFac.getCommands()[i]->processCommand(fileSource);
 	}
+	//
+	//
+	//char* hop = "peshko";
+	//fileSource.insertLine(hop, 2);
+	//
+	//
 
 	std::cout << "------------------------------------------" << std::endl;
 

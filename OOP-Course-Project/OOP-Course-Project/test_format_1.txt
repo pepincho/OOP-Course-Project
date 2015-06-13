@@ -1,0 +1,4 @@
+int x; int b;int x;
+int abv;
+dsadas;
+ho hopdsada; ddam;

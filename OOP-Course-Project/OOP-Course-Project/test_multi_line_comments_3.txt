@@ -1,24 +1,24 @@
-aa//peshko
-abv/*pesho
+--aa//peshko
+--abv/*pesho
 e
 	hop
 	trop
-abv   */bb
+abv   */--bb
 //peshko
 //
 // alabala
 //
-pesho/*
+--pesho/*
 asd
 asd
-	*/asd
+	*/--asd
 /* peshko e golqm */	
-mercedes
-/* mashinka */gg
+--mercedes
+/* mashinka */--gg
 /* peshko e golqm */
 --pesho
 //ha ha
-dai mii//hio
+--dai mii//hio
 -----bugs
-dai/* dadsa */aaa/*sdada*/dsadas/*fddsa*/
+--dai/* dadsa */aaa/*sdada*/dsadas/*fddsa*/
 //hio
