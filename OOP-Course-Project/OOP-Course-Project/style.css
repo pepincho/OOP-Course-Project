@@ -28,3 +28,21 @@
 		h1#home1 {
 			text-align:center;
 		}
+		p#directive {
+			color: pink;
+		}
+		p#comment {
+			color: green;
+		}
+		span#res_word {
+			font-weight:bold;
+			color: blue;
+		}
+		span#number {
+			font-weight: bold;
+			color: black;
+		}
+		span#string {
+			font-weight:bold;
+			color: red;
+		}

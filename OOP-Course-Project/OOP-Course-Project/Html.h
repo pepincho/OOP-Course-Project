@@ -23,6 +23,14 @@ public:
 	//
 private:
 	char* makeInitialHtmlFile();
+
+	bool isLineDirective(char* line);
+	bool hasComment(char*, int);
+
+	//
+	int countWords(const char* str);
+	void toWords(const char *sentence, char **word);
+	bool isAlphaNum(char c);
 public:
 	void generateHtmlFile(TextManager& text);
 };
