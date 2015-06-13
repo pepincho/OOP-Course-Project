@@ -1,27 +1,27 @@
-#include "Identation.h"
+#include "Indentation.h"
 
 #include <iostream>
 
-Identation::Identation() {
-	//std::cout << "[Entering Identation::Identation()]" << std::endl;
+Indentation::Indentation() {
+	//std::cout << "[Entering Indentation::Indentation()]" << std::endl;
 }
 
-Identation::Identation(bool identationStyle) {
-	//std::cout << "[Entering Identation::Identation(bool identationStyle)]" << std::endl;
+Indentation::Indentation(bool identationStyle) {
+	//std::cout << "[Entering Indentation::Indentation(bool identationStyle)]" << std::endl;
 	this->identationStyle = identationStyle;
 }
 
-Identation::~Identation() {
-	//std::cout << "[Entering Identation::~Identation()]" << std::endl;
+Indentation::~Indentation() {
+	//std::cout << "[Entering Indentation::~Indentation()]" << std::endl;
 }
 
-void Identation::processCommand(TextManager& text) {
+void Indentation::processCommand(TextManager& text) {
 	std::cout << "processIdentation on file " << text.getFileName() << std::endl;
 
 	changeStyle(text);
 }
 
-void Identation::changeStyle(TextManager& text) {
+void Indentation::changeStyle(TextManager& text) {
 	char** source = text.getFileLines();
 	int numberLines = text.getNumberLines();
 	//std::cout << "style: " << this->identationStyle << std::endl;
@@ -103,7 +103,7 @@ void Identation::changeStyle(TextManager& text) {
 	}
 }
 
-bool Identation::areNextFourSpaces(char* line, int startPos) {
+bool Indentation::areNextFourSpaces(char* line, int startPos) {
 	if (line[startPos] == ' ' && line[startPos + 1] == ' ' && line[startPos + 2] == ' ' && line[startPos + 3] == ' ') {
 		return true;
 	}

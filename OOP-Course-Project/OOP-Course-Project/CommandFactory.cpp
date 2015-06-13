@@ -44,14 +44,14 @@ void CommandFactory::createCommands(char* nameCommand, int indx) {
 		this->commands[indx] = new NewLines(style);
 		return;
 	}
-	else if (strcmp(nameCommand, "identation=tabs") == 0) {
+	else if (strcmp(nameCommand, "indentation=tabs") == 0) {
 		bool style = 0;
-		this->commands[indx] = new Identation(style);
+		this->commands[indx] = new Indentation(style);
 		return;
 	}
-	else if (strcmp(nameCommand, "identation=spaces") == 0) {
+	else if (strcmp(nameCommand, "indentation=spaces") == 0) {
 		bool style = 1;
-		this->commands[indx] = new Identation(style);
+		this->commands[indx] = new Indentation(style);
 		return;
 	}
 	else if (strcmp(nameCommand, "format") == 0) {

@@ -3,11 +3,11 @@
 #include "Command.h"
 #include "TextManager.h"
 
-class Identation : public Command {
+class Indentation : public Command {
 public:
-	Identation();
-	Identation(bool);
-	virtual ~Identation();
+	Indentation();
+	Indentation(bool);
+	virtual ~Indentation();
 
 	virtual void processCommand(TextManager& text);
 private:

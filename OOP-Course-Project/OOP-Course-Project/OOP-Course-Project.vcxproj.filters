@@ -33,9 +33,6 @@
     <ClCompile Include="NewLines.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Identation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Html.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -43,6 +40,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CommandFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Indentation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -62,9 +62,6 @@
     <ClInclude Include="NewLines.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Identation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Html.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -72,6 +69,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CommandFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Indentation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

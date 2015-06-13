@@ -82,7 +82,7 @@
     <ClCompile Include="ConsoleInput.cpp" />
     <ClCompile Include="Format.cpp" />
     <ClCompile Include="Html.cpp" />
-    <ClCompile Include="Identation.cpp" />
+    <ClCompile Include="Indentation.cpp" />
     <ClCompile Include="NewLines.cpp" />
     <ClCompile Include="TextManager.cpp" />
     <ClCompile Include="main.cpp" />
@@ -94,7 +94,7 @@
     <ClInclude Include="ConsoleInput.h" />
     <ClInclude Include="Format.h" />
     <ClInclude Include="Html.h" />
-    <ClInclude Include="Identation.h" />
+    <ClInclude Include="Indentation.h" />
     <ClInclude Include="NewLines.h" />
     <ClInclude Include="TextManager.h" />
   </ItemGroup>
