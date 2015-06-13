@@ -17,4 +17,7 @@ private:
 
 	int findEndLine(char*, int);
 	bool hasEndLine(char* line, int currLineLen);
+
+	bool hasOpeningBracket(char* line, int currLineLen);
+	bool hasClosingBracket(char* line, int currLineLen);
 };

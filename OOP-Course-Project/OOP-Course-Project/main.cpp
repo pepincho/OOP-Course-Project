@@ -25,7 +25,7 @@ int main(int argc, char* argv[]) {
 	std::cout << "------------------------------------------" << std::endl;
 
 	//char* currFileName = "test.txt";
-	char* currFileName = "test_multi_line_comments_3.txt";
+	char* currFileName = "test_format_1.txt";
 
 	TextManager fileSource(currFileName);
 	char** source = fileSource.getFileLines();
@@ -39,21 +39,40 @@ int main(int argc, char* argv[]) {
 	std::cout << "Size of the file before commands: " << sizeSource << std::endl;
 
 	std::cout << "------------------------------------------" << std::endl;
-
-	CommandFactory commandFac(cmdInput.getCommands(), cmdInput.getNumberCommands());
-	int numberCommands = commandFac.getNumberCommands();
 	
-	for (int i = 0; i < numberCommands; i++) {
-		commandFac.getCommands()[i]->processCommand(fileSource);
+	try {
+		CommandFactory commandFac(cmdInput.getCommands(), cmdInput.getNumberCommands());
+		int numberCommands = commandFac.getNumberCommands();
+	
+		for (int i = 0; i < numberCommands; i++) {
+			commandFac.getCommands()[i]->processCommand(fileSource);
+		}
 	}
+	catch (std::exception& e) {
+		std::cerr << "ERROR: Operation failed! Reason: " << e.what() << std::endl;
+		std::exit(0);
+	}
+
 	//
+	//int numberFiles = cmdInput.getNumberFiles();
+	//for (int i = 0; i < numberFiles; i++) {
+	//	TextManager fileSource(cmdInput.getPathsToFiles()[i]);
+
+	//	for (int j = 0; j < numberCommands; j++) {
+	//		commandFac.getCommands()[j]->processCommand(fileSource);
+	//	}
+	//	fileSource.writeToFile(cmdInput.getPathsToFiles()[i]);
+	//}
+	//
+
+
 	//
 	//char* hop = "peshko";
 	//fileSource.insertLine(hop, 2);
 	//
 	//
 
-	std::cout << "------------------------------------------" << std::endl;
+	//std::cout << "------------------------------------------" << std::endl;
 
 	char** newSource = fileSource.getFileLines();
 	int counterNewLines = fileSource.getNumberLines();
@@ -66,5 +85,6 @@ int main(int argc, char* argv[]) {
 	std::cout << "Size of the file after commands: " << sizeNewSource << std::endl;
 
 	std::cout << "------------------------------------------" << std::endl;
+
 	return 0;
 }

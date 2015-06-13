@@ -62,9 +62,11 @@ void CommandFactory::createCommands(char* nameCommand, int indx) {
 		this->commands[indx] = new Html();
 		return;
 	}
-	//else {
-	//	throw std::exception("Wrong command");
-	//}
+	else {
+		char message[130];
+		sprintf_s(message, 130, "Unknown command \"%s\"", nameCommand);
+		throw std::exception(message);
+	}
 }
 
 const int CommandFactory::getNumberCommands() const {
