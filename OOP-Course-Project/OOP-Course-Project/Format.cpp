@@ -14,6 +14,7 @@ void Format::processCommand(TextManager& text) {
 	std::cout << "processFormat on file " << text.getFileName() << std::endl;
 	
 	formatText(text);
+	removeEmptyLines(text);
 }
 
 void Format::formatText(TextManager& text) {
@@ -221,4 +222,23 @@ bool Format::hasClosingBracket(char* line, int currLineLen) {
 		}
 	}
 	return false;
+}
+
+//
+// function that removes empty lines from the source
+//
+void Format::removeEmptyLines(TextManager& text) {
+	char** source = text.getFileLines();
+	int numLines = text.getNumberLines();
+
+	for (int i = 0; i < text.getNumberLines(); i++) {
+		if (text.getFileLines()[i][0] == '\r' && text.getFileLines()[i][1] == '\n') {
+			text.removeLineTEST(i);
+			i--;
+		}
+		else if (text.getFileLines()[i][0] == '\n') {
+			text.removeLineTEST(i);
+			i--;
+		}
+	}
 }

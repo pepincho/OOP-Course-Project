@@ -16,6 +16,7 @@ public:
 private:
 	void formatText(TextManager& text);
 
+	void removeEmptyLines(TextManager& text);
 
 	void makeNewLine(char* line, int currLineLen, int startLine, int endLine, char* newLine);
 

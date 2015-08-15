@@ -12,10 +12,10 @@ Comments::~Comments() {
 
 void Comments::processCommand(TextManager& text) {
 	std::cout << "processComments on file " << text.getFileName() << std::endl;
-	removeComment(text);
-	removeMultiLineComment(text);
+	//removeComment(text);
+	//removeMultiLineComment(text);
 
-	removeEmptyLines(text);
+	//removeEmptyLines(text);
 }
 
 //

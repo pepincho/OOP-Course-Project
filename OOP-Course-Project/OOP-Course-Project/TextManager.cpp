@@ -42,7 +42,7 @@ void TextManager::readToFile(char* fileName) {
 	if (sourceLines == NULL)
 		return;
 
-	int currMaxLineLen = 50;
+	int currMaxLineLen = 200;
 	for (int i = 0; i < this->numberLines; i++) {
 		this->sourceLines[i] = new (std::nothrow) char[currMaxLineLen];
 		if (sourceLines[i] == NULL)
